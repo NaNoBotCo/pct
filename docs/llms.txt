@@ -1,7 +1,8 @@
 # The Pacific Crest Trail · เส้นทางแปซิฟิกเครสต์
 
-> The PCT from Mexico to Canada, 2,650 miles: numbers, a south-to-north photo walk, fire, snow and flood map links, notable years, towns and trail businesses listed for sale (checked 28 Sep 2026), trail traditions, and Burney Mountain Guest Ranch at mile 1411. English and Thai.
+> The PCT from Mexico to Canada, 2,650 miles. The trail drawn as a constellation at the real latitude and longitude of its towns and passes, under the current moon phase; photographs south to north; trail traditions; Burney Mountain Guest Ranch at mile 1411; two whole towns for sale (Belden, Campo) and trail lodges listed or sold, checked 28 Sep 2026; fire, snow, flood and weather map links; notable years.
 
-- [The page](https://nanobotco.github.io/pct/)
-- Sections: #trail #walk #conditions #years #sale #traditions #burney #sources
-- Text CC BY 4.0, NaNoBotCo. Photos from Wikimedia Commons keep their own licences.
+- [English](https://nanobotco.github.io/pct/)
+- [ไทย](https://nanobotco.github.io/pct/th/)
+- Sections: #walk #burney #traditions #sale #conditions #years #sources
+- Text CC BY 4.0, NaNoBotCo. Photos from Wikimedia Commons keep their own licences, credited on each band.
