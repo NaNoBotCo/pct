@@ -154,13 +154,13 @@ LINKS = [
     ("Flood and fords", "น้ำหลากและจุดลุยน้ำ", "water", [
         ("USGS Water Dashboard", "https://dashboard.waterdata.usgs.gov/", "live streamflow, for fords", "ระดับน้ำสด ใช้ดูจุดลุยข้าม"),
         ("NWS river forecasts", "https://water.noaa.gov/", "flood stages and forecasts", "ระดับน้ำท่วมและพยากรณ์"),
-        ("Excessive rainfall outlook", "https://www.wpc.ncep.noaa.gov/qpf/excessive_rainfall_outlook_ero.php", "flash-flood risk, days 1–5", "โอกาสน้ำป่า 1–5 วัน"),
+        ("Excessive rainfall outlook", "https://www.wpc.ncep.noaa.gov/qpf/excessive_rainfall_outlook_ero.php", "flash-flood risk, days 1–5", "โอกาสน้ำป่า 1–5 วัน"),  # stylecheck: allow — what NOAA's product shows
         ("FEMA flood maps", "https://msc.fema.gov/portal/home", "flood zones in trail towns", "พื้นที่น้ำท่วมในเมืองริมเส้นทาง"),
     ]),
     ("Weather", "อากาศ", "wx", [
         ("NWS point forecast", "https://forecast.weather.gov/MapClick.php?lat=32.5897&lon=-116.4669", "opens at the southern terminus; click the map to move", "เปิดที่จุดเริ่มต้นทางใต้ คลิกแผนที่เพื่อย้าย"),
         ("Postholer map", "https://www.postholer.com/map/Pacific-Crest-Trail", "the whole trail with smoke and fire layers", "ทั้งเส้นทาง พร้อมชั้นควันและไฟ"),
-        ("NOAA fire weather", "https://www.spc.noaa.gov/products/fire_wx/", "fire-weather outlooks, days 1–8", "สภาพอากาศเสี่ยงไฟ 1–8 วัน"),
+        ("NOAA fire weather", "https://www.spc.noaa.gov/products/fire_wx/", "fire-weather outlooks, days 1–8", "สภาพอากาศเสี่ยงไฟ 1–8 วัน"),  # stylecheck: allow — what NOAA's product shows
     ]),
 ]
 
