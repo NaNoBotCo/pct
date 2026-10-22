@@ -218,7 +218,7 @@ YEARS = [
     ("2021", "The Dixie Fire put 161 miles of the trail inside its closure and burned 112 of them, 4.2 percent of the PCT.", "ไฟป่าดิกซีทำให้ต้องปิดเส้นทาง 161 ไมล์ ไหม้ไป 112 ไมล์ คือ 4.2 เปอร์เซ็นต์ของทั้งเส้น"),
     ("2023", "California snowpack reached 196% of average. Many hikers skipped the Sierra and came back.", "หิมะแคลิฟอร์เนียมากถึง 196% ของค่าเฉลี่ย หลายคนข้ามเซียร์ราไปก่อนแล้วค่อยกลับมา"),
     ("2025", "Canada ended PCT entry permits.", "แคนาดายกเลิกใบอนุญาตเดินข้ามแดน"),
-    ("2026", "On 29 July wildfire closed the last 43 miles. Hikers built a temporary monument near Rainy Pass to finish at. On 22 August Fastest Known Time listed a southbound self-supported time of 45 days and 18 hours, 58 miles a day.", "29 กรกฎาคม ไฟป่าปิด 43 ไมล์สุดท้าย นักเดินสร้างอนุสรณ์ชั่วคราวใกล้เรนีพาสไว้เป็นเส้นชัย 22 สิงหาคม เว็บ Fastest Known Time บันทึกเวลาขาลงใต้แบบแบกเองทั้งหมด 45 วัน 18 ชั่วโมง วันละ 58 ไมล์"),
+    ("2026", "On 29 July wildfire closed the last 43 miles. Hikers built a temporary monument near Rainy Pass to finish at. On 22 August a southbound runner finished in 45 days and 18 hours, self-supported, 58 miles a day; Fastest Known Time lists it as the fastest in that style.", "29 กรกฎาคม ไฟป่าปิด 43 ไมล์สุดท้าย นักเดินสร้างอนุสรณ์ชั่วคราวใกล้เรนีพาสไว้เป็นเส้นชัย 22 สิงหาคม นักวิ่งขาลงใต้เข้าเส้นชัยใน 45 วัน 18 ชั่วโมง แบบแบกเองทั้งหมด วันละ 58 ไมล์ เว็บ Fastest Known Time บันทึกว่าเร็วที่สุดในแบบนี้"),
 ]
 
 SOURCES = [
