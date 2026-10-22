@@ -370,11 +370,11 @@ def page():
 <link rel="alternate" hreflang="en" href="{SITE}"><link rel="alternate" hreflang="th" href="{SITE}th/"><link rel="alternate" hreflang="x-default" href="{SITE}">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Pacific Crest Trail · เส้นทางแปซิฟิกเครสต์">
 <meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{here}">
-<meta property="og:image" content="{SITE}card.jpg"><meta property="og:image:secure_url" content="{SITE}card.jpg"><meta property="og:image:type" content="image/jpeg">
+<meta property="og:image" content="{SITE}card{"" if L == "en" else "-" + L}.jpg"><meta property="og:image:secure_url" content="{SITE}card{"" if L == "en" else "-" + L}.jpg"><meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="{e(t("The Pacific Crest Trail drawn as a constellation under the moon", "เส้นทางแปซิฟิกเครสต์วาดเป็นกลุ่มดาวใต้แสงจันทร์"))}">
+<meta property="og:image:alt" content="{e(t("The Pacific Crest Trail drawn as a constellation under the moon", "บัตรแชร์: เส้นทางแปซิฟิกเครสต์ จากเม็กซิโกถึงแคนาดา 2,650 ไมล์"))}">
 <meta property="og:locale" content="{t("en_US", "th_TH")}"><meta property="og:locale:alternate" content="{t("th_TH", "en_US")}">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="{SITE}card.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="{SITE}card{"" if L == "en" else "-" + L}.jpg">
 <link rel="icon" href="{r}icon.svg" type="image/svg+xml">
 <link rel="alternate" type="text/plain" href="{SITE}llms.txt" title="llms.txt">
 <style>{css}</style>
