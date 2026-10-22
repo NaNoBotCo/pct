@@ -103,7 +103,7 @@ var rng = function (s) { return function () { s = (s * 1664525 + 1013904223) >>>
     var prev = null, next = null; W.forEach(function (p) { if (p.mile <= mile) prev = p; else if (!next) next = p; });
     var days = Math.round(day - START), ph8 = ['new', 'waxing crescent', 'first quarter', 'waxing gibbous', 'full', 'waning gibbous', 'last quarter', 'waning crescent'][Math.round(ph * 8) % 8];
     var ph8th = ['เดือนดับ', 'ข้างขึ้นเสี้ยว', 'ขึ้นครึ่งดวง', 'ข้างขึ้นเกือบเต็ม', 'เต็มดวง', 'ข้างแรมเกือบเต็ม', 'แรมครึ่งดวง', 'ข้างแรมเสี้ยว'][Math.round(ph * 8) % 8];
-    $('w-mile').textContent = TH ? fmt(mile * 1.609344) + ' กม.' : 'Mile ' + fmt(mile);
+    $('w-mile').textContent = TH ? fmt(mile * 1.609344) + ' กม.' : 'Mile ' + fmt(mile, mile % 1 ? 1 : 0);
     $('w-where').textContent = (prev ? prev.name : '') + (next ? T(' → next: ', ' → ถัดไป: ') + next.name + ' · ' + mi2(next.mile - mile) : '');
     $('w-elev').textContent = ft2(f);
     $('w-gain').textContent = ft2(gn);
@@ -116,7 +116,7 @@ var rng = function (s) { return function () { s = (s * 1664525 + 1013904223) >>>
     $('w-light').textContent = fmt(dl, 1) + T(' h', ' ชม.');
     $('w-state').textContent = { CA: T('California', 'แคลิฟอร์เนีย'), OR: T('Oregon', 'โอเรกอน'), WA: T('Washington', 'วอชิงตัน') }[stateAt(mile)];
     $('w-pct').textContent = fmt((mile / MILES) * 100) + '%';
-    $('w-left').textContent = mi2(MILES - mile);
+    $('w-left').textContent = mi2(Math.max(0, MILES - mile));
   }
   rg.addEventListener('input', function () { mile = +rg.value; draw(); });
   var drag = function (e) { var b = cv.getBoundingClientRect(), x = (e.touches ? e.touches[0].clientX : e.clientX) - b.left; mile = Math.round(Math.max(0, Math.min(MILES, ((x - 8) / (b.width - 16)) * MILES))); rg.value = mile; draw(); };
@@ -144,9 +144,9 @@ var rng = function (s) { return function () { s = (s * 1664525 + 1013904223) >>>
       c.fillStyle = r === sel ? hot : ink; c.globalAlpha = r === sel ? 1 : 0.45; c.font = (w < 560 ? 9 : 10) + 'px ' + css('--body'); c.textAlign = 'right'; c.fillText(TH ? fmt(a * 1.609344) : a, L - 8, y0 + 3); c.globalAlpha = 1;
     }
     c.fillStyle = ink; c.globalAlpha = 0.6; c.font = '700 10px ' + css('--body'); c.textAlign = 'left'; c.fillText(T('MEXICO', 'เม็กซิโก'), L, 16); c.fillText(T('CANADA', 'แคนาดา'), L, h - 8); c.globalAlpha = 1;
-    var m0 = sel * 100, m1 = Math.min(MILES, m0 + 100), hi = 0, him = m0, lo = 1e9, lom = m0; for (var m = m0; m <= m1; m += 0.5) { var f = elev(m); if (f > hi) { hi = f; him = m; } if (f < lo) { lo = f; lom = m; } }
+    var m0 = sel * 100, m1 = Math.min(MILES, m0 + 100), hi = 0, him = m0, lo = 1e9, lom = m0; P.forEach(function (pt) { if (pt[0] < m0 || pt[0] > m1) return; if (pt[1] > hi) { hi = pt[1]; him = pt[0]; } if (pt[1] < lo) { lo = pt[1]; lom = pt[0]; } });
     var names = W.filter(function (p) { return p.mile >= m0 && p.mile < m1; }).map(function (p) { return p.name; });
-    $('rg-cap').innerHTML = '<b>' + (TH ? 'กม. ' + fmt(m0 * 1.609344) + '–' + fmt(m1 * 1.609344) : 'Miles ' + m0 + '–' + m1) + '</b> · ' + T('high point ', 'จุดสูงสุด ') + ft2(hi) + T(' at mile ', ' ที่ไมล์ ') + fmt(him) +
+    $('rg-cap').innerHTML = '<b>' + (TH ? 'กม. ' + fmt(m0 * 1.609344) + '–' + fmt(m1 * 1.609344) : 'Miles ' + m0 + '–' + m1) + '</b> · ' + T('high point ', 'จุดสูงสุด ') + ft2(hi) + T(' at mile ', ' ที่ไมล์ ') + fmt(him, him % 1 ? 1 : 0) +
       ' · ' + T('low ', 'ต่ำสุด ') + ft2(lo) + ' · ' + T('climb ', 'ขึ้นรวม ') + ft2(gain(m1) - gain(m0)) + (names.length ? ' · ' + names.join(', ') : '');
   }
   cv.addEventListener('click', function (e) { var b = cv.getBoundingClientRect(), rowH = b.width < 560 ? 16 : 24, r = Math.floor((e.clientY - b.top - 120 + rowH * 0.9) / rowH); if (r >= 0 && r < ROWS) { sel = r; draw(); } });
@@ -181,7 +181,8 @@ var rng = function (s) { return function () { s = (s * 1664525 + 1013904223) >>>
     H.forEach(function (hk) { for (var j = 1; j < hk.pts.length; j++) { var a = hk.pts[j - 1], b = hk.pts[j]; if (a[0] === b[0] && b[1] - a[1] > 0.5) { c.beginPath(); c.moveTo(X(a[1]), Y(a[0])); c.lineTo(X(b[1]), Y(b[0])); c.stroke(); } } });
     c.globalAlpha = 1; c.lineWidth = 1;
     // your line
-    var my = walk(doy(YEAR, +sd.value.slice(5, 7), +sd.value.slice(8, 10)), +sp.value);
+    var sv = /^\d{4}-\d{2}-\d{2}$/.test(sd.value) ? sd.value : YEAR + '-04-20'; // a cleared date field draws the 20 April hiker
+    var my = walk(doy(YEAR, +sv.slice(5, 7), +sv.slice(8, 10)), +sp.value);
     c.strokeStyle = css('--hot'); c.lineWidth = 2.6; c.beginPath(); my.forEach(function (pt, j) { var x = X(pt[1]), y = Y(pt[0]); j ? c.lineTo(x, y) : c.moveTo(x, y); }); c.stroke();
     var end = my[my.length - 1], km = dayOf(my, D.snow.mile), wait = my.gate ? Math.max(0, Math.round(D.snow.day - km)) : 0;
     var chester = dayOf(my, D.chester), near = H.filter(function (hk) { return hk.quit > D.chester && Math.abs(dayOf(hk.pts, D.chester) - chester) <= 1; }).length;
@@ -225,7 +226,8 @@ var rng = function (s) { return function () { s = (s * 1664525 + 1013904223) >>>
   var near = function (lat, lon) { var best = 1e9, bp = null; for (var m = 0; m <= MILES; m += 5) { var p = trackAt(m), dd = dist(lat, lon, p[0], p[1]); if (dd < best) { best = dd; bp = m; } } return [best, bp]; };
   function trackAt(m) { for (var j = 1; j < W.length; j++) if (W[j].mile >= m) { var a = W[j - 1], b = W[j], u = (m - a.mile) / ((b.mile - a.mile) || 1); return [a.lat + (b.lat - a.lat) * u, a.lon + (b.lon - a.lon) * u]; } var z = W[W.length - 1]; return [z.lat, z.lon]; }
   fetch(F).then(function (r) { return r.json(); }).then(function (js) {
-    var wf = [], rx = 0; (js.features || []).forEach(function (f) { var a = f.attributes, g = f.geometry; if (!g) return; var n = near(g.y, g.x); if (n[0] > 25) return; if (a.IncidentTypeCategory === 'RX') { rx++; return; } wf.push({ name: a.IncidentName, acres: a.IncidentSize, pc: a.PercentContained, d: n[0], m: n[1] }); });
+    if (!js || js.error || !Array.isArray(js.features)) throw new Error('fire list');  // ArcGIS reports failures inside a 200
+    var wf = [], rx = 0; js.features.forEach(function (f) { var a = f.attributes, g = f.geometry; if (!g) return; var n = near(g.y, g.x); if (n[0] > 25) return; if (a.IncidentTypeCategory === 'RX') { rx++; return; } wf.push({ name: a.IncidentName, acres: a.IncidentSize, pc: a.PercentContained, d: n[0], m: n[1] }); });
     wf.sort(function (a, b) { return (b.acres || 0) - (a.acres || 0); });
     var el = $('now-fire'); if (!el) return;
     el.innerHTML = T('Wildfires NIFC lists today within 25 miles of the trail (by the line through its waypoints): <b>' + wf.length + '</b>. ', 'ไฟป่าที่ NIFC รายงานวันนี้ ห่างเส้นทางไม่เกิน 40 กม.: <b>' + wf.length + '</b> ') +

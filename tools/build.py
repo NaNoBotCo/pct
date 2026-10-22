@@ -47,6 +47,15 @@ def pct_data():
                     "big": bool(f.get("big")), "line": bool(f.get("line")), "live": bool(f.get("live"))})
     d = {k: v for k, v in tj.items() if k != "flags"}
     d["profile"] = [[round(float(m), 2), round(float(e))] for m, e in prof]
+    # the half-mile grid can step over a pass: add the 0.1 mi centerline point at each waypoint's mile
+    fine = json.load(open(os.path.join(g, "profile_0p1mi.json"), encoding="utf-8"))
+    fine = fine if isinstance(fine, list) else fine.get("profile") or fine.get("points")
+    have = {p[0] for p in d["profile"]}
+    for w in out:
+        m, ft = min(fine, key=lambda p: abs(float(p[0]) - w["mile"]))
+        if round(float(m), 2) not in have:
+            d["profile"].append([round(float(m), 2), round(float(ft))])
+    d["profile"].sort()
     d["waypoints"] = out
     return d
 
@@ -209,7 +218,7 @@ YEARS = [
     ("2021", "The Dixie Fire put 161 miles of the trail inside its closure and burned 112 of them, 4.2 percent of the PCT.", "ไฟป่าดิกซีทำให้ต้องปิดเส้นทาง 161 ไมล์ ไหม้ไป 112 ไมล์ คือ 4.2 เปอร์เซ็นต์ของทั้งเส้น"),
     ("2023", "California snowpack reached 196% of average. Many hikers skipped the Sierra and came back.", "หิมะแคลิฟอร์เนียมากถึง 196% ของค่าเฉลี่ย หลายคนข้ามเซียร์ราไปก่อนแล้วค่อยกลับมา"),
     ("2025", "Canada ended PCT entry permits.", "แคนาดายกเลิกใบอนุญาตเดินข้ามแดน"),
-    ("2026", "On 29 July wildfire closed the last 43 miles. Hikers built a temporary monument near Rainy Pass to finish at. On 22 August a southbound runner set the self-supported record, 45 days and 18 hours, 58 miles a day.", "29 กรกฎาคม ไฟป่าปิด 43 ไมล์สุดท้าย นักเดินสร้างอนุสรณ์ชั่วคราวใกล้เรนีพาสไว้เป็นเส้นชัย 22 สิงหาคม นักวิ่งขาลงใต้ทำสถิติแบบแบกเองทั้งหมด 45 วัน 18 ชั่วโมง วันละ 58 ไมล์"),
+    ("2026", "On 29 July wildfire closed the last 43 miles. Hikers built a temporary monument near Rainy Pass to finish at. On 22 August a southbound runner reported a self-supported time of 45 days and 18 hours, 58 miles a day, pending verification.", "29 กรกฎาคม ไฟป่าปิด 43 ไมล์สุดท้าย นักเดินสร้างอนุสรณ์ชั่วคราวใกล้เรนีพาสไว้เป็นเส้นชัย 22 สิงหาคม นักวิ่งขาลงใต้รายงานเวลาแบบแบกเองทั้งหมด 45 วัน 18 ชั่วโมง วันละ 58 ไมล์ ยังรอการยืนยัน"),
 ]
 
 SOURCES = [
@@ -242,7 +251,7 @@ SOURCES = [
 # ---------------------------------------------------------------- the new sections: numbers you can walk through
 def walkit_html(d):
     jumps = [w for w in d["waypoints"] if w["big"]]
-    btns = "".join(f'<button type="button" data-mile="{round(w["mile"])}">{e(w["short"] or w["name"])}</button>' for w in jumps)
+    btns = "".join(f'<button type="button" data-mile="{w["mile"]}">{e(w["short"] or w["name"])}</button>' for w in jumps)
     rows = [("w-elev", "Elevation", "ความสูง"), ("w-gain", "Climbed so far", "ขึ้นมาแล้ว"), ("w-ev", "Everests, sea level to summit", "เท่ากับปีนเอเวอเรสต์จากระดับน้ำทะเล"),
             ("w-loss", "Descended so far", "ลงมาแล้ว"), ("w-steps", "Steps", "ก้าว"), ("w-days", "Days on trail", "วันบนเส้นทาง"),
             ("w-date", "Date, leaving 20 April", "วันที่ ถ้าออกเดิน 20 เม.ย."), ("w-moon", "Moon that night", "พระจันทร์คืนนั้น"),
@@ -255,7 +264,7 @@ def walkit_html(d):
                      "ลากไปตามเส้นทางหรือแตะชื่อสถานที่ ความสูงมาจากโปรไฟล์ ระยะขึ้นเขาสะสมไปเรื่อย ๆ วันที่และพระจันทร์ตามนักเดินที่ออกจากแคมโป 20 เมษายน ด้วยความเร็วเดียวกับแผนภูมิด้านล่าง"))}</p>
 <div class="wk"><p class="wk-at"><b id="w-mile">—</b> <span id="w-where"></span></p>
 <canvas id="prof" role="img" aria-label="{e(t("The elevation profile of the whole trail, with a walker at the chosen mile", "โปรไฟล์ความสูงของทั้งเส้นทาง และนักเดินที่ไมล์ที่เลือก"))}"></canvas>
-<label class="sr" for="mi">{e(t("Mile", "ไมล์"))}</label><input type="range" id="mi" min="0" max="{round(d["miles"])}" step="1" value="{round(d["chester"])}">
+<label class="sr" for="mi">{e(t("Mile", "ไมล์"))}</label><input type="range" id="mi" min="0" max="{d["miles"]}" step="0.1" value="{d["chester"]}">
 <div class="jump">{btns}</div>
 <dl class="read">{dl}</dl></div>
 <p class="mute small">{e(t(d["notes"]["walk"]["en"], d["notes"]["walk"]["th"]))}</p>
