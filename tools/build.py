@@ -5,8 +5,11 @@ Built the Mae Hong Son Loop way: one inlined stylesheet, system fonts, site-kit 
 bands for the photographs, a top bar that folds away, and a Thai edition at /th/.
     python3 tools/build.py
 """
+import base64
 import html
+import json
 import os
+import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -17,6 +20,35 @@ from bands import band  # noqa: E402
 
 SITE = "https://nanobotco.github.io/pct/"
 L = "en"
+# Another build may import this module and fill EXTRA: "nav" [(id, en, th)], "after_walk" (html),
+# "css", "scripts". The public site leaves it empty.
+EXTRA = {}
+
+
+def pct_data():
+    """window.PCT for trail.js: the profile and waypoints gleaned in tools/glean/, plus tools/trail.json."""
+    g = os.path.join(HERE, "glean")
+    prof = json.load(open(os.path.join(g, "profile_half.json"), encoding="utf-8"))  # every 0.5 mi, from the 0.1 mi profile
+    wps = json.load(open(os.path.join(g, "waypoints.json"), encoding="utf-8"))
+    tj = json.load(open(os.path.join(HERE, "trail.json"), encoding="utf-8"))
+    if isinstance(prof, dict):
+        prof = prof.get("profile") or prof.get("points")
+    if isinstance(wps, dict):
+        wps = wps.get("waypoints") or wps.get("points")
+    flags = tj.get("flags", {})
+    out = []
+    for w in wps:
+        name = w.get("name")
+        f = flags.get(name, {})
+        if f.get("skip"):
+            continue
+        out.append({"name": f.get("name", name), "short": f.get("short"), "mile": float(w["mile"]), "lat": float(w["lat"]),
+                    "lon": float(w["lon"]), "ft": w.get("elevation_ft") or w.get("ft"), "kind": w.get("kind"),
+                    "big": bool(f.get("big")), "line": bool(f.get("line")), "live": bool(f.get("live"))})
+    d = {k: v for k, v in tj.items() if k != "flags"}
+    d["profile"] = [[round(float(m), 2), round(float(e))] for m, e in prof]
+    d["waypoints"] = out
+    return d
 
 
 def e(x):
@@ -77,9 +109,14 @@ WALK3 = [
      ("Jason Hollinger", "CC BY 2.0", C + "Silmakeen_River_Valley_(5037828305).jpg"), "right"),
 ]
 
-SLAB = [("2,650", "miles", "ไมล์"), ("13,153", "feet, Forester Pass", "ฟุต ช่องเขาฟอเรสเตอร์"),
-        ("5", "months, end to end", "เดือน ตลอดสาย"), ("3", "states", "รัฐ"),
-        ("6,840", "permits, 2024", "ใบอนุญาต ปี 2024"), ("770", "finishers, 2024", "คนเดินจบ ปี 2024")]
+SLAB = [("2,655.8", "miles on the 2026 markers", "ไมล์ ตามหลักไมล์ปี 2026"),
+        ("16.9", "Everests of climbing, from sea level", "เท่ากับปีนเอเวอเรสต์จากระดับน้ำทะเล"),
+        ("2.3×", "the straight line, Campo to Canada", "เท่าของเส้นตรง แคมโปถึงแคนาดา"),
+        ("+1:54", "more June daylight at Canada than Mexico", "แสงกลางวันเดือนมิถุนายนที่แคนาดายาวกว่าเม็กซิโก (ชม.:นาที)"),
+        ("4.9%", "of its miles above 10,000 ft", "ของระยะทางอยู่สูงกว่า 3,048 ม."),
+        ("5", "full moons on an average hike", "คืนพระจันทร์เต็มดวง ในการเดินเฉลี่ย"),
+        ("6.0M", "steps, about 40,000 a day", "ก้าว ราววันละ 40,000"),
+        ("6,840", "permits, 2024", "ใบอนุญาต ปี 2024")]
 
 TRAD = [
     ("Trail names", "ชื่อบนเส้นทาง", "Other hikers give you one. Many people finish known only by it.",
@@ -96,8 +133,8 @@ TRAD = [
      "ไมล์ 702 ทะเลทรายจบตรงนี้ ทุกคนบนระเบียงปรบมือต้อนรับ"),
     ("Milestones in stone", "หลักไมล์จากก้อนหิน", "500, 1000, 2000, spelled on the ground in rocks and pinecones.",
      "เลข 500, 1000, 2000 เรียงด้วยก้อนหินและลูกสนบนพื้น"),
-    ("Halfway", "ครึ่งทาง", "A small monument in Lassen National Forest. Its mile number moves with every reroute.",
-     "อนุสรณ์เล็ก ๆ ในป่าแลสเซน เลขไมล์ขยับทุกครั้งที่เส้นทางเปลี่ยน"),
+    ("Halfway", "ครึ่งทาง", "A small monument in Lassen National Forest, 8.2 miles south of the road to Chester. It stood at mile 1,320.7 in 2016 and at 1,324.7 on the 2026 markers, without moving: the trail around it grew.",
+     "อนุสรณ์เล็ก ๆ ในป่าแลสเซน ห่างถนนเข้าเชสเตอร์ไปทางใต้ 8.2 ไมล์ ปี 2016 อยู่ที่ไมล์ 1,320.7 หลักไมล์ปี 2026 บอก 1,324.7 ตัวอนุสรณ์ไม่ได้ขยับ เส้นทางรอบ ๆ ยาวขึ้น"),
     ("The pancake challenge", "ท้ากินแพนเค้ก", "Seiad Valley café: five 13-inch pancakes in two hours, and they're free.",
      "ร้านกาแฟหุบเขาเซียด แพนเค้กห้าแผ่น กว้างแผ่นละ 33 เซนติเมตร หมดในสองชั่วโมง กินฟรี"),
     ("The Oregon Challenge", "ท้าข้ามโอเรกอน", "All of Oregon, about 450 miles, in 14 days.",
@@ -169,9 +206,10 @@ YEARS = [
     ("1993", "Finished, with a golden spike in Soledad Canyon.", "สร้างเสร็จ ตอกหมุดทองที่หุบเขาโซลีแดด"),
     ("2017", "Big snow year. Fires closed the Eagle Creek route until 2021 and about 70 miles in Washington.", "หิมะมาก ไฟป่าปิดเส้นทางอีเกิลครีกถึงปี 2021 และราว 70 ไมล์ในวอชิงตัน"),
     ("2020", "The PCTA asked hikers to stay home. 18 finishes reported.", "สมาคมขอให้นักเดินป่าอยู่บ้าน มีคนแจ้งว่าเดินจบ 18 คน"),
-    ("2021", "The Dixie Fire closed about 130 miles, mile 1235 to 1365.", "ไฟป่าดิกซีปิดเส้นทางราว 130 ไมล์ ไมล์ 1235 ถึง 1365"),
+    ("2021", "The Dixie Fire put 161 miles of the trail inside its closure and burned 112 of them, 4.2 percent of the PCT.", "ไฟป่าดิกซีทำให้ต้องปิดเส้นทาง 161 ไมล์ ไหม้ไป 112 ไมล์ คือ 4.2 เปอร์เซ็นต์ของทั้งเส้น"),
     ("2023", "California snowpack reached 196% of average. Many hikers skipped the Sierra and came back.", "หิมะแคลิฟอร์เนียมากถึง 196% ของค่าเฉลี่ย หลายคนข้ามเซียร์ราไปก่อนแล้วค่อยกลับมา"),
     ("2025", "Canada ended PCT entry permits.", "แคนาดายกเลิกใบอนุญาตเดินข้ามแดน"),
+    ("2026", "On 29 July wildfire closed the last 43 miles. Hikers built a temporary monument near Rainy Pass to finish at. On 22 August a southbound runner set the self-supported record, 45 days and 18 hours, 58 miles a day.", "29 กรกฎาคม ไฟป่าปิด 43 ไมล์สุดท้าย นักเดินสร้างอนุสรณ์ชั่วคราวใกล้เรนีพาสไว้เป็นเส้นชัย 22 สิงหาคม นักวิ่งขาลงใต้ทำสถิติแบบแบกเองทั้งหมด 45 วัน 18 ชั่วโมง วันละ 58 ไมล์"),
 ]
 
 SOURCES = [
@@ -187,7 +225,78 @@ SOURCES = [
     ("Burney Mountain Guest Ranch", "https://burneymountain.com/"),
     ("LongTrailsWiki: Burney Mountain", "http://www.longtrailswiki.net/wiki/Burney_Mountain_Guest_Ranch"),
     ("Wikimedia Commons", "https://commons.wikimedia.org/"),
+    ("PCTA centerline and 2026 mile markers", "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/PCTA_Centerline/FeatureServer"),
+    ("PCTA fires and closures layer", "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/PCT_Fires_and_Trail_Closures_public_view/FeatureServer"),
+    ("USGS 3DEP elevation", "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer"),
+    ("Halfmile: elevation gain on the PCT", "https://pctmap.net/2014/03/04/elevation-gain-on-the-pacific-crest-trail/"),
+    ("Halfway Anywhere: PCT hiker survey 2025", "https://www.halfwayanywhere.com/trails/pacific-crest-trail/pct-hiker-survey-2025/"),
+    ("Backpacker: the halfway point, 2016", "https://www.backpacker.com/trips/the-halfway-point-of-the-pacific-crest-trail/"),
+    ("US Naval Observatory: moon phases and sun times", "https://aa.usno.navy.mil/data/"),
+    ("OPB: the temporary monument, 2026", "https://www.opb.org/article/2026/08/18/pacific-crest-trail-homemade-temporary-monument-marks-end-wildfire/"),
+    ("Fastest Known Time: PCT self-supported, 2026", "https://fastestknowntime.com/fkt/nick-fowler-pacific-crest-trail-ca-or-wa-2026-08-22"),
+    ("Open-Meteo: current weather", "https://open-meteo.com/"),
+    ("NIFC: WFIGS current incident locations", "https://data-nifc.opendata.arcgis.com/"),
 ]
+
+
+# ---------------------------------------------------------------- the new sections: numbers you can walk through
+def walkit_html(d):
+    jumps = [w for w in d["waypoints"] if w["big"]]
+    btns = "".join(f'<button type="button" data-mile="{round(w["mile"])}">{e(w["short"] or w["name"])}</button>' for w in jumps)
+    rows = [("w-elev", "Elevation", "ความสูง"), ("w-gain", "Climbed so far", "ขึ้นมาแล้ว"), ("w-ev", "Everests, sea level to summit", "เท่ากับปีนเอเวอเรสต์จากระดับน้ำทะเล"),
+            ("w-loss", "Descended so far", "ลงมาแล้ว"), ("w-steps", "Steps", "ก้าว"), ("w-days", "Days on trail", "วันบนเส้นทาง"),
+            ("w-date", "Date, leaving 20 April", "วันที่ ถ้าออกเดิน 20 เม.ย."), ("w-moon", "Moon that night", "พระจันทร์คืนนั้น"),
+            ("w-light", "Daylight", "แสงกลางวัน"), ("w-state", "State", "รัฐ"), ("w-pct", "Done", "เดินแล้ว"), ("w-left", "To Canada", "ถึงแคนาดาอีก")]
+    dl = "".join(f'<div><dt>{e(t(a, b))}</dt><dd id="{i}">—</dd></div>' for i, a, b in rows)
+    return f"""<section id="walkit" class="walkit">
+<span class="kicker">{e(t("Every mile, as arithmetic", "ทุกไมล์ คิดเป็นตัวเลข"))}</span>
+<h2>{e(t("Walk it", "ลองเดิน"))}</h2>
+<p class="lede">{e(t("Drag along the trail or tap a place. The height comes from the profile, the climb adds up as you go, and the date and the moon follow a hiker who leaves Campo on 20 April and keeps the paces in the bubble chart below.",
+                     "ลากไปตามเส้นทางหรือแตะชื่อสถานที่ ความสูงมาจากโปรไฟล์ ระยะขึ้นเขาสะสมไปเรื่อย ๆ วันที่และพระจันทร์ตามนักเดินที่ออกจากแคมโป 20 เมษายน ด้วยความเร็วเดียวกับแผนภูมิด้านล่าง"))}</p>
+<div class="wk"><p class="wk-at"><b id="w-mile">—</b> <span id="w-where"></span></p>
+<canvas id="prof" role="img" aria-label="{e(t("The elevation profile of the whole trail, with a walker at the chosen mile", "โปรไฟล์ความสูงของทั้งเส้นทาง และนักเดินที่ไมล์ที่เลือก"))}"></canvas>
+<label class="sr" for="mi">{e(t("Mile", "ไมล์"))}</label><input type="range" id="mi" min="0" max="{round(d["miles"])}" step="1" value="{round(d["chester"])}">
+<div class="jump">{btns}</div>
+<dl class="read">{dl}</dl></div>
+<p class="mute small">{e(t(d["notes"]["walk"]["en"], d["notes"]["walk"]["th"]))}</p>
+</section>"""
+
+
+def ridges_html(d):
+    n = -(-int(d["miles"]) // 100)
+    return f"""<section id="ridges" class="ridges">
+<span class="kicker">{e(t("The profile, as a picture", "โปรไฟล์ที่กลายเป็นภาพ"))}</span>
+<h2>{e(t(f"The whole trail in {n} lines", f"ทั้งเส้นทางใน {n} เส้น"))}</h2>
+<p class="lede">{e(t("Each line is 100 miles of the elevation profile, read every half mile, Mexico at the top and Canada at the bottom. Each line rises from its own lowest point, all at one height scale, and hides the ones behind it. The Sierra stands up out of the middle of California, Lassen and Oregon lie low, and the North Cascades come back hard at the end. Tap a line.",
+                     "แต่ละเส้นคือโปรไฟล์ความสูง 100 ไมล์ อ่านทุกครึ่งไมล์ เม็กซิโกอยู่บนสุด แคนาดาอยู่ล่างสุด แต่ละเส้นเริ่มจากจุดต่ำสุดของตัวเอง ใช้มาตราส่วนความสูงเดียวกัน เส้นหน้าบังเส้นหลัง เซียร์ราตั้งตระหง่านกลางแคลิฟอร์เนีย แลสเซนกับโอเรกอนต่ำลง แล้วเทือกนอร์ทแคสเคดส์กลับมาชันอีกครั้งตอนท้าย แตะเส้นใดก็ได้"))}</p>
+<canvas id="ridges-cv" role="img" aria-label="{e(t("The trail's elevation profile in 100-mile lines, stacked", "โปรไฟล์ความสูงของเส้นทาง แบ่งเป็นเส้นละ 100 ไมล์ ซ้อนกัน"))}"></canvas>
+<p class="cap" id="rg-cap"></p>
+</section>"""
+
+
+def bubble_html(d):
+    y = d["year"]
+    return f"""<section id="bubble" class="bubble">
+<span class="kicker">{e(t("Date across, mile up", "วันที่ตามแนวนอน ไมล์ตามแนวตั้ง"))}</span>
+<h2>{e(t("The bubble", "ฝูงนักเดิน"))}</h2>
+<p class="lede">{e(t(d["notes"]["bubble"]["en"], d["notes"]["bubble"]["th"]))}</p>
+<div class="bctl"><label>{e(t("Start", "วันออกเดิน"))} <input type="date" id="b-start" value="{y}-04-20" min="{y}-03-01" max="{y}-06-15"></label>
+<label>{e(t("Pace", "ความเร็ว"))} <input type="range" id="b-pace" min="0.75" max="1.3" step="0.01" value="1"></label></div>
+<canvas id="bub" role="img" aria-label="{e(t("A timetable chart: each line is one modeled hiker, date across, mile up", "แผนภูมิตารางเวลา เส้นละหนึ่งนักเดินจำลอง วันที่ตามแนวนอน ไมล์ตามแนวตั้ง"))}"></canvas>
+<p class="cap" id="b-out"></p>
+<p class="mute small">{e(t(d["notes"]["model"]["en"], d["notes"]["model"]["th"]))}</p>
+</section>"""
+
+
+def now_html():
+    return f"""<div id="now" class="now">
+<h3>{e(t("Right now on the trail", "ตอนนี้บนเส้นทาง"))}</h3>
+<p class="cap" id="now-sum">{e(t("Loading the weather along the trail…", "กำลังโหลดสภาพอากาศตลอดเส้นทาง…"))}</p>
+<ol class="nowl" id="now-list"></ol>
+<p class="cap" id="now-fire"></p>
+<p class="mute small">{e(t("Weather: Open-Meteo, current conditions at each place. Fires: NIFC WFIGS current incident locations; distance measured to straight lines between the places listed, so a fire near a bend can read a few miles off.",
+                          "สภาพอากาศ: Open-Meteo สภาพปัจจุบันของแต่ละจุด ไฟป่า: NIFC WFIGS ตำแหน่งเหตุการณ์ปัจจุบัน ระยะวัดถึงเส้นตรงระหว่างจุดที่ระบุ ไฟใกล้โค้งอาจคลาดไปไม่กี่ไมล์"))}</p>
+</div>"""
 
 
 def bands(rows, r):
@@ -198,6 +307,15 @@ def bands(rows, r):
     return "\n".join(out)
 
 
+def page_with(D0):
+    global _D0
+    _D0 = D0
+    return page()
+
+
+_D0 = None
+
+
 def page():
     r = "../" if L == "th" else ""
     here = SITE + ("th/" if L == "th" else "")
@@ -206,7 +324,9 @@ def page():
              "trail traditions, whole towns for sale, fire and snow maps, Burney Mountain Guest Ranch.",
              "จากเม็กซิโกถึงแคนาดา 2,650 ไมล์ เส้นทางที่วาดเป็นกลุ่มดาว ภาพจากใต้ขึ้นเหนือ ประเพณีบนเส้นทาง "
              "เมืองทั้งเมืองที่ประกาศขาย แผนที่ไฟป่าและหิมะ และฟาร์มพักแรมเบอร์นีย์เมาเทน")
-    nav = [("walk", "Walk", "เดิน"), ("traditions", "Traditions", "ประเพณี"), ("burney", "Burney", "เบอร์นีย์"),
+    D = _D0 or pct_data()
+    nav = [("walkit", "Walk it", "ลองเดิน"), ("ridges", "Lines", "เส้น"), ("bubble", "Bubble", "ฝูง"), ("walk", "Photos", "ภาพ")] + \
+          EXTRA.get("nav", []) + [("traditions", "Traditions", "ประเพณี"), ("burney", "Burney", "เบอร์นีย์"),
            ("sale", "For sale", "ประกาศขาย"), ("conditions", "Fire · snow", "ไฟป่า · หิมะ"),
            ("years", "Years", "ปี"), ("sources", "Sources", "แหล่งข้อมูล")]
     navh = "".join(f'<a href="#{a}">{e(t(b, c))}</a>' for a, b, c in nav)
@@ -239,7 +359,7 @@ def page():
     years = "".join(f'<li><b>{y}</b><span>{e(t(a, b))}</span></li>' for y, a, b in YEARS)
     srcs = "".join(f'<li><a href="{e(u)}">{e(n)}</a></li>' for n, u in SOURCES)
 
-    css = open(os.path.join(HERE, "bands.css"), encoding="utf-8").read() + CSS
+    css = open(os.path.join(HERE, "bands.css"), encoding="utf-8").read() + CSS + EXTRA.get("css", "")
 
     return f"""<!doctype html><html lang="{L}"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -282,8 +402,11 @@ def page():
 <p class="lede">{e(t("From the Mexican border near Campo to Manning Park at the Canadian border, through California, Oregon and Washington. Most people who walk it all take about five months, April to September.",
                      "จากชายแดนเม็กซิโกใกล้แคมโปถึงอุทยานแมนนิงที่ชายแดนแคนาดา ผ่านแคลิฟอร์เนีย โอเรกอน และวอชิงตัน คนที่เดินจบทั้งเส้นใช้เวลาราวห้าเดือน เมษายนถึงกันยายน"))}</p>
 
+{walkit_html(D)}
+
 <div id="walk"></div>
 {bands(WALK, r)}
+{EXTRA["after_walk"](D) if "after_walk" in EXTRA else ""}
 
 <section id="burney" class="burney">
 <figure><img src="{r}img/burney-bunks.jpg" alt="{e(t("The PCT bunk room: log bunk beds with patterned quilts", "ห้องนอนรวมของนักเดินป่า เตียงสองชั้นไม้ซุงกับผ้าห่มลาย"))}" width="600" height="337" loading="lazy"></figure>
@@ -300,12 +423,16 @@ def page():
 
 {bands(WALK2, r)}
 
+{ridges_html(D)}
+
 <section id="traditions">
 <h2>{e(t("Traditions", "ประเพณีบนเส้นทาง"))}</h2>
 <div class="trads">{trad}</div>
 </section>
 
 {bands(WALK3, r)}
+
+{bubble_html(D)}
 
 <section id="sale">
 <h2>{e(t("For sale", "ประกาศขาย"))}</h2>
@@ -319,6 +446,7 @@ def page():
 <section id="conditions">
 <h2>{e(t("Fire · snow · flood", "ไฟป่า · หิมะ · น้ำหลาก"))}</h2>
 <p class="lede">{e(t("Snow opens the Sierra, usually mid-June. Fire decides the rest of summer.", "หิมะเป็นตัวเปิดเทือกเขาเซียร์รา ปกติกลางเดือนมิถุนายน ไฟป่ากำหนดหน้าร้อนที่เหลือ"))}</p>
+{now_html()}
 <div class="lks">{links}</div>
 </section>
 
@@ -334,7 +462,9 @@ def page():
 </section>
 </main>
 <footer class="bot"><div class="in">{e(t("Text CC BY 4.0, NaNoBotCo. Photographs keep their own licences.", "ข้อความ CC BY 4.0 NaNoBotCo ภาพถ่ายใช้สัญญาอนุญาตของแต่ละภาพ"))} · <a href="https://github.com/NaNoBotCo/pct">GitHub</a></div></footer>
-<script src="{r}sky.js" defer></script><script src="{r}top.js" defer></script>
+<script>window.PCT={json.dumps(D, separators=(",", ":"), ensure_ascii=False)};</script>
+<script src="{r}sky.js" defer></script><script src="{r}top.js" defer></script><script src="{r}trail.js" defer></script>
+{EXTRA.get("scripts", "")}
 </body></html>
 """
 
@@ -406,9 +536,9 @@ p{margin:.6rem 0;max-width:42rem}
 .lede{font-size:clamp(1.05rem,2.3vw,1.25rem);max-width:42rem}
 .kicker{display:block;font-family:var(--display);font-size:.72rem;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem}
 
-.slab{display:grid;grid-template-columns:repeat(6,1fr);border:3px solid var(--ink);margin:1.4rem 0;background:var(--bg)}
+.slab{display:grid;grid-template-columns:repeat(4,1fr);border:3px solid var(--ink);margin:1.4rem 0;background:var(--bg)}
 .slab div{padding:.75rem .8rem;border-right:3px solid var(--ink)}
-.slab div:last-child{border-right:0}
+.slab div:nth-child(4n){border-right:0}.slab div:nth-child(-n+4){border-bottom:3px solid var(--ink)}
 .slab b{display:block;font-family:var(--display);font-size:clamp(1.9rem,4.6vw,2.8rem);line-height:.92;font-weight:800;color:var(--accent)}
 .slab span{display:block;font-size:.66rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mute);font-weight:800;margin-top:.3rem}
 :lang(th) .slab span{letter-spacing:0;font-size:.8rem;text-transform:none}
@@ -467,6 +597,39 @@ p{margin:.6rem 0;max-width:42rem}
 footer.bot{border-top:2px solid var(--line)}
 footer.bot .in{max-width:68rem;margin:0 auto;padding:1.4rem 1rem 3rem;font-size:.82rem;color:var(--mute)}
 footer.bot a{color:var(--mute)}
+/* ---- the new sections: walk it, the lines, the bubble, right now */
+:root{--ridge-bg:#f4efe3;--ridge-ink:#1d1830;--bubble:#3b2f6b;--lines-bg:#0b0a1a;--lines-ink:#f3ead6}
+.kicker+h2{margin-top:.15rem}section>.kicker:first-child{margin-top:3rem}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ridge-bg:#0c0a16;--ridge-ink:#e9e1ff;--bubble:#c9b8ff}}
+:root[data-theme="dark"]{--ridge-bg:#0c0a16;--ridge-ink:#e9e1ff;--bubble:#c9b8ff}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.cap{font-size:.95rem;max-width:52rem}
+.walkit .wk{border:3px solid var(--ink);border-radius:16px;overflow:hidden;background:#0d1030}
+.wk-at{margin:0;padding:.6rem .9rem;color:#f6eccb;font-size:.95rem;max-width:none;background:#0d1030}
+.wk-at b{font-family:var(--display);font-size:1.35rem;text-transform:uppercase;color:#ffd97a;margin-right:.4rem}
+.walkit canvas{display:block;width:100%;touch-action:none;cursor:ew-resize}
+.walkit input[type=range]{width:calc(100% - 1.6rem);margin:.6rem .8rem 0;accent-color:#ffd97a}
+.jump{display:flex;flex-wrap:wrap;gap:.35rem;padding:.6rem .8rem}
+.jump button{font:800 .72rem var(--display);letter-spacing:.1em;text-transform:uppercase;border:2px solid #ffd97a;color:#ffd97a;background:transparent;border-radius:99px;padding:.3rem .7rem;cursor:pointer}
+.jump button:hover{background:#ffd97a;color:#0d1030}
+:lang(th) .jump button{font-family:var(--thai);letter-spacing:0;text-transform:none}
+.read{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:0;margin:0;background:var(--panel);border-top:3px solid var(--ink)}
+.read div{padding:.55rem .8rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.read dt{font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mute);font-weight:800}
+.read dd{margin:0;font-family:var(--display);font-size:1.35rem;font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums}
+:lang(th) .read dt{letter-spacing:0;text-transform:none;font-size:.78rem}
+#w-ev{color:var(--hot)}
+.ridges canvas,.bubble canvas{display:block;width:100%;border:3px solid var(--ink);border-radius:14px;cursor:pointer}
+.bctl{display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;align-items:center;margin:.4rem 0 .8rem;font-weight:800;font-size:.85rem}
+.bctl input[type=date]{font:inherit;padding:.25rem .4rem;border:2px solid var(--ink);border-radius:8px;background:var(--panel);color:var(--ink)}
+.bctl input[type=range]{accent-color:var(--hot);vertical-align:middle}
+.now{margin:1rem 0 1.6rem}
+.nowl{list-style:none;margin:.6rem 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(13.5rem,1fr));gap:.5rem}
+.nowl li{position:relative;border:2px solid var(--line);border-radius:12px;padding:.5rem .7rem .55rem;background:var(--panel);overflow:hidden;display:grid;grid-template-columns:1fr auto;gap:0 .6rem}
+.nowl li::before{content:"";position:absolute;left:0;bottom:0;height:5px;width:calc(var(--t,50) * 1%);background:linear-gradient(90deg,#3d7fd8,#f0a500 60%,#d9480f)}
+.nowl .nm{font-weight:800;font-size:.9rem;line-height:1.25}.nowl .nm small{display:block;color:var(--mute);font-weight:600}
+.nowl b{font-family:var(--display);font-size:1.7rem;line-height:1}
+.nowl .wx,.nowl .ss{grid-column:1/-1;font-size:.8rem;color:var(--mute)}
 @media print{.sky canvas,header.top{display:none}.sky{background:none;color:var(--ink);min-height:0}}
 """
 

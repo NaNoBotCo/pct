@@ -10,3 +10,9 @@ Built the way the Mae Hong Son Loop is: one inlined stylesheet, system fonts, si
 - `python3 tools/serve.py` serves `docs/` on port 8871.
 
 Text CC BY 4.0. Photos from Wikimedia Commons keep their own licences, credited on each band.
+
+## Numbers you can walk through (22 Oct 2026)
+
+- `docs/trail.js` draws Walk it, the 27 lines, the bubble chart and Right now from `window.PCT`, which `tools/build.py` inlines from `tools/glean/` (profile, waypoints, 39 sourced deductions) and `tools/trail.json` (model settings, which places show where).
+- Right now fetches Open-Meteo and NIFC WFIGS from the reader's browser.
+- `tools/build.py` exposes `EXTRA` (nav, a section after the first photographs, css, scripts) for builds that reuse the page.

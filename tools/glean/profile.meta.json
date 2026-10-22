@@ -1,0 +1,20 @@
+{
+ "file": "profile.json",
+ "format": "[[pcta_mile, elevation_ft], ...]",
+ "points": 3312,
+ "spacing": "1.0 mi, plus one extra point inside a mile where the 0.1 mi profile departs from a straight line by 100 ft or more",
+ "full_resolution_file": "profile_0p1mi.json ([[mile, elevation_ft], ...], 26,559 points at 0.1 mi; mile 0.0 is the first vertex of the PCTA centerline)",
+ "mile_basis": "PCTA 2026 mile markers (PCT_Mile_Markers_2026 and Tenthmile_Marker_2026), Campo = 0.0, northern terminus (Monument 78) = 2655.8",
+ "locations": "Latitude and longitude of each tenth-mile marker from the PCTA Tenthmile_Marker_2026 layer",
+ "elevation_source": "USGS 3D Elevation Program (3DEP) ImageServer getSamples, bare-earth DEM, best available resolution at each point (1 m lidar-derived where available, 1/3 arc-second elsewhere), metres converted to feet x 3.280839895",
+ "elevation_source_url": "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer",
+ "centerline_source_url": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/PCTA_Centerline/FeatureServer",
+ "retrieved": "2026-10-22",
+ "postholer": "postholer.com could not be reached from this Mac on 2026-10-22 (curl timeout, WebFetch connection refused, browser pane navigation failed). PCTA publishes the same Halfmile-derived centerline and mile markers that Postholer builds on; no Postholer file was used.",
+ "resolution_notes": [
+  "A sample every 0.1 mi can sit 13 ft or more below a peak: Forester Pass reads 13,140 ft at its nearest tenth-mile marker (published 13,153 ft).",
+  "Bare-earth DEM under a bridge reads the water: the Columbia River under the Bridge of the Gods reads 78 ft at miles 2150.2 and 2150.3.",
+  "Gain and loss computed from this profile depend on sampling interval; see numbers.json item gain-sampling-interval."
+ ],
+ "fine_profile_used_for_gain": "Not shipped. 265,296 samples at 0.01 mi (52.8 ft) along the PCTA centerline polyline (1,210,247 vertices), same DEM; used only to compute gain and loss in numbers.json."
+}

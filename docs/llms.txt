@@ -4,5 +4,6 @@
 
 - [English](https://nanobotco.github.io/pct/)
 - [ไทย](https://nanobotco.github.io/pct/th/)
-- Sections: #walk #burney #traditions #sale #conditions #years #sources
+- Sections: #walkit (drag along the elevation profile: climb so far, Everests, steps, date, moon, daylight) #ridges (the profile in 27 lines of 100 miles) #bubble (a timetable chart of 300 modeled hikers, date against mile) #walk #burney #traditions #sale #conditions (live weather at 23 places, Open-Meteo; fires within 25 miles, NIFC WFIGS) #years #sources
+- Data: PCTA 2026 mile markers and centerline, USGS 3DEP elevations, Halfmile's 489,418 ft climb, the Halfway Anywhere 2025 survey; tools/glean/ in the repository holds every number with its source and arithmetic.
 - Text CC BY 4.0, NaNoBotCo. Photos from Wikimedia Commons keep their own licences, credited on each band.
