@@ -1,0 +1,1247 @@
+{
+ "generated": "2026-10-22",
+ "conventions": "mile = PCTA 2026 mile markers unless a row says otherwise; ft = feet; statute miles; arithmetic written out; confidence high / medium / low",
+ "postholer": "not reachable from this Mac on 2026-10-22",
+ "items": [
+  {
+   "id": "gain-everests",
+   "group": "elevation",
+   "claim": "Walking Mexico to Canada climbs 489,418 ft, which is 16.9 times the height of Mount Everest measured from sea level.",
+   "inputs": [
+    {
+     "name": "Total gain, Campo to Manning Park, northbound",
+     "value": 489418,
+     "source": "https://pctmap.net/2014/03/04/elevation-gain-on-the-pacific-crest-trail/",
+     "source_label": "Halfmile, Elevation Gain on the Pacific Crest Trail (2014-03-04)",
+     "note": "Halfmile Project 2014, USGS 1/3 arc-second DEM, 5 m smoothing threshold; the PCTA published the same figure"
+    },
+    {
+     "name": "Same figure at PCTA",
+     "value": 489418,
+     "source": "https://www.pcta.org/2014/new-numbers-elevation-gain-loss-pacific-crest-trail-17581/",
+     "source_label": "PCTA, New numbers for elevation gain and loss (2014-03-04)"
+    },
+    {
+     "name": "Everest height, ft",
+     "value": 29031.7,
+     "source": "https://en.wikipedia.org/wiki/Mount_Everest",
+     "source_label": "Wikipedia, Mount Everest (2020 China-Nepal height 8,848.86 m = 29,031.7 ft)"
+    }
+   ],
+   "arithmetic": "489,418 / 29,031.7 = 16.86",
+   "result": "16.86 Everests of climbing",
+   "confidence": "high",
+   "confidence_note": "Gain is the 2014 Halfmile figure and the PCTA repeated it. Reroutes since 2014 change it slightly. Everest is counted sea level to summit; no hiker starts at sea level. Wikipedia lists 489,000 ft as well."
+  },
+  {
+   "id": "loss-everests",
+   "group": "elevation",
+   "claim": "The same walk also descends 488,411 ft, 16.8 Everests going down.",
+   "inputs": [
+    {
+     "name": "Total loss, same route",
+     "value": 488411,
+     "source": "https://pctmap.net/2014/03/04/elevation-gain-on-the-pacific-crest-trail/",
+     "source_label": "Halfmile, Elevation Gain on the Pacific Crest Trail (2014-03-04)"
+    },
+    {
+     "name": "Everest height, ft",
+     "value": 29031.7,
+     "source": "https://en.wikipedia.org/wiki/Mount_Everest",
+     "source_label": "Wikipedia, Mount Everest (2020 China-Nepal height 8,848.86 m = 29,031.7 ft)"
+    }
+   ],
+   "arithmetic": "488,411 / 29,031.7 = 16.82",
+   "result": "16.82 Everests of descent",
+   "confidence": "high",
+   "confidence_note": "Same source and caveats as gain-everests."
+  },
+  {
+   "id": "gain-vs-net",
+   "group": "elevation",
+   "claim": "The trail climbs about 486 ft for every 1 ft of net elevation difference between Mexico and Canada.",
+   "inputs": [
+    {
+     "name": "Total gain",
+     "value": 489418,
+     "source": "https://pctmap.net/2014/03/04/elevation-gain-on-the-pacific-crest-trail/",
+     "source_label": "Halfmile, Elevation Gain on the Pacific Crest Trail (2014-03-04)"
+    },
+    {
+     "name": "Net change, Campo to Manning Park",
+     "value": 1007,
+     "source": "https://pctmap.net/2014/03/04/elevation-gain-on-the-pacific-crest-trail/",
+     "source_label": "Halfmile, Elevation Gain on the Pacific Crest Trail (2014-03-04)",
+     "note": "gain minus loss = 489,418 - 488,411"
+    },
+    {
+     "name": "DEM at Campo terminus, ft",
+     "value": 2918,
+     "source": "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer",
+     "source_label": "USGS 3DEP ImageServer getSamples",
+     "note": "sample at 32.58974, -116.46698"
+    },
+    {
+     "name": "DEM at Monument 78, ft",
+     "value": 4225,
+     "source": "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer",
+     "source_label": "USGS 3DEP ImageServer getSamples",
+     "note": "sample at 49.00030, -120.80211"
+    }
+   ],
+   "arithmetic": "489,418 / 1,007 = 486. Cross-check with my DEM ends: 4,225 - 2,918 = 1,307 net, 489,418 / 1,307 = 374",
+   "result": "about 486 to 1 (Halfmile) or 374 to 1 (3DEP ends)",
+   "confidence": "medium",
+   "confidence_note": "Halfmile net is +1,007 ft; my DEM terminus elevations differ by 300 ft (different DEM, terminus point, datum). Both ratios are big either way."
+  },
+  {
+   "id": "gain-per-mile",
+   "group": "elevation",
+   "claim": "Each mile of the PCT averages 184 ft of climbing and 184 ft of descent, about a 3.5 percent grade.",
+   "inputs": [
+    {
+     "name": "Total gain",
+     "value": 489418,
+     "source": "https://pctmap.net/2014/03/04/elevation-gain-on-the-pacific-crest-trail/",
+     "source_label": "Halfmile, Elevation Gain on the Pacific Crest Trail (2014-03-04)"
+    },
+    {
+     "name": "Total loss",
+     "value": 488411,
+     "source": "https://pctmap.net/2014/03/04/elevation-gain-on-the-pacific-crest-trail/",
+     "source_label": "Halfmile, Elevation Gain on the Pacific Crest Trail (2014-03-04)"
+    },
+    {
+     "name": "PCTA mile-marker length",
+     "value": 2655.8,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/PCT_Mile_Markers_2026/FeatureServer",
+     "source_label": "PCT_Mile_Markers_2026 (PCTA half-mile markers)",
+     "note": "markers run 0.5 to 2,660 with positions to 2,655.8; tenth-mile markers end at 2655.8"
+    }
+   ],
+   "arithmetic": "489,418 / 2655.8 = 184.3 ft per mile; 488,411 / 2655.8 = 183.9; 184.3 / 5,280 = 3.49 percent",
+   "result": "184.3 ft up and 183.9 ft down per mile",
+   "confidence": "high",
+   "confidence_note": "Gain is a 2014 figure divided by the 2026 length; the 2014 route was within a few miles of this length."
+  },
+  {
+   "id": "gain-per-day",
+   "group": "elevation",
+   "claim": "A hiker who finishes in the survey-average 148 days climbs about 3,300 ft every day on trail, 3,800 ft on each day of actual hiking.",
+   "inputs": [
+    {
+     "name": "Total gain",
+     "value": 489418,
+     "source": "https://pctmap.net/2014/03/04/elevation-gain-on-the-pacific-crest-trail/",
+     "source_label": "Halfmile, Elevation Gain on the Pacific Crest Trail (2014-03-04)"
+    },
+    {
+     "name": "Average days on trail, completers, 2025 survey",
+     "value": 148,
+     "source": "https://www.halfwayanywhere.com/trails/pacific-crest-trail/pct-hiker-survey-2025/",
+     "source_label": "Halfway Anywhere, Pacific Crest Trail Hiker Survey 2025 (N = 790, self-selected)"
+    },
+    {
+     "name": "Average days hiking excluding zeros",
+     "value": 130,
+     "source": "https://www.halfwayanywhere.com/trails/pacific-crest-trail/pct-hiker-survey-2025/",
+     "source_label": "Halfway Anywhere, Pacific Crest Trail Hiker Survey 2025 (N = 790, self-selected)"
+    }
+   ],
+   "arithmetic": "489,418 / 148 = 3,307; 489,418 / 130 = 3,765",
+   "result": "3,307 ft per day on trail, 3,765 ft per hiking day",
+   "confidence": "medium",
+   "confidence_note": "Survey is self-selected (N = 790) and reports averages for completers."
+  },
+  {
+   "id": "gain-sampling-interval",
+   "group": "elevation",
+   "claim": "The climbing total depends on how often you measure: 263,000 ft sampled every 2 miles, 311,000 every mile, 451,500 every 0.01 mile, against Halfmile's 489,418 from about 3/4 million points.",
+   "inputs": [
+    {
+     "name": "265,296 DEM samples along the PCTA centerline, every 0.01 mi",
+     "value": 451507,
+     "source": "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer",
+     "source_label": "USGS 3DEP ImageServer getSamples",
+     "note": "gain with a 16.4 ft (5 m) reversal threshold, same threshold Halfmile used"
+    },
+    {
+     "name": "Halfmile points",
+     "value": 750000,
+     "source": "https://pctmap.net/2014/03/04/elevation-gain-on-the-pacific-crest-trail/",
+     "source_label": "Halfmile, Elevation Gain on the Pacific Crest Trail (2014-03-04)",
+     "note": "\"roughly 3/4 million GPS sample points\", spacing about 18 ft"
+    },
+    {
+     "name": "Centerline vertices",
+     "value": 1210247,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/PCTA_Centerline/FeatureServer",
+     "source_label": "PCTA_Centerline FeatureServer (PCTA authoritative centerline, last update 01/2025)",
+     "note": "one vertex per 11.6 ft on average"
+    }
+   ],
+   "arithmetic": "Same profile, same 16.4 ft threshold, keeping every k-th sample: k=1 (0.01 mi) 451,507 ft; k=5 (0.05 mi) 426,437; k=10 (0.1 mi) 410,379; k=50 (0.5 mi) 350,699; k=100 (1 mi) 310,747; k=200 (2 mi) 263,259. Loss moves in step (450,199, 425,129, 409,040, 349,127, 308,950, 261,462).",
+   "result": "gain grows by about 45 percent between 2-mile and 0.01-mile sampling and has not flattened at 0.01 mi",
+   "confidence": "medium",
+   "confidence_note": "My own calculation with the same 3DEP DEM (1 m lidar-derived where available). It lands 7.7 percent under Halfmile at 0.01 mi (451,507 vs 489,418) because Halfmile sampled about 3x more densely on a different DEM. Treat 489,418 as the published figure and these as a measure of how the number moves. The pattern (finer ruler, longer answer) matches a coastline."
+  },
+  {
+   "id": "hardest-easiest-100",
+   "group": "elevation",
+   "claim": "The hardest 100-mile stretch of the PCT (miles 2440 to 2540, past Stevens Pass at 2467.4 and Glacier Peak Wilderness at 2500.2) climbs 240 ft per mile; the easiest (miles 1320 to 1420, from the halfway monument through Lassen to Burney) climbs 96 ft per mile.",
+   "inputs": [
+    {
+     "name": "Gain in mile 2440 to 2540",
+     "value": 23985,
+     "source": "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer",
+     "source_label": "USGS 3DEP ImageServer getSamples",
+     "note": "my calculation, 0.01 mi samples, 16.4 ft threshold, PCTA miles mapped from the centerline"
+    },
+    {
+     "name": "Gain in mile 1320 to 1420",
+     "value": 9598,
+     "source": "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer",
+     "source_label": "USGS 3DEP ImageServer getSamples",
+     "note": "same method"
+    },
+    {
+     "name": "Halfmile section CA_Sec_L gain, the lowest of 29 sections",
+     "value": 5282,
+     "source": "https://pctmap.net/2014/03/04/elevation-gain-on-the-pacific-crest-trail/",
+     "source_label": "Halfmile, Elevation Gain on the Pacific Crest Trail (2014-03-04)"
+    }
+   ],
+   "arithmetic": "23,985 / 100 = 239.9 ft per mile; 9,598 / 100 = 96.0 ft per mile; 239.9 / 96.0 = 2.5",
+   "result": "a 2.5 to 1 spread in climbing per mile between the hardest and easiest 100 miles",
+   "confidence": "medium",
+   "confidence_note": "My calculation, rolling 100-mile windows in 10-mile steps. Halfmile's lowest-gain section agrees on where the easy ground is. The window edges would shift with another threshold."
+  },
+  {
+   "id": "washington-share",
+   "group": "elevation",
+   "claim": "Washington holds 19 percent of the trail by length but 23 percent of the climbing: about 224 ft of gain per mile against a trail average of 184.",
+   "inputs": [
+    {
+     "name": "Halfmile WA sections H to L gain (29,552 + 18,327 + 18,773 + 31,441 + 15,030)",
+     "value": 113123,
+     "source": "https://pctmap.net/2014/03/04/elevation-gain-on-the-pacific-crest-trail/",
+     "source_label": "Halfmile, Elevation Gain on the Pacific Crest Trail (2014-03-04)"
+    },
+    {
+     "name": "Washington length: Bridge of the Gods (about mile 2150.3) to 2655.8",
+     "value": 505.5,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Tenthmile_Marker_2026/FeatureServer",
+     "source_label": "Tenthmile_Marker_2026 (PCTA tenth-mile markers)"
+    },
+    {
+     "name": "Total gain",
+     "value": 489418,
+     "source": "https://pctmap.net/2014/03/04/elevation-gain-on-the-pacific-crest-trail/",
+     "source_label": "Halfmile, Elevation Gain on the Pacific Crest Trail (2014-03-04)"
+    }
+   ],
+   "arithmetic": "113,123 / 505.5 = 223.8 ft per mile; 113,123 / 489,418 = 23.1 percent; 505.5 / 2655.8 = 19.0 percent",
+   "result": "Washington: 19.0 percent of miles, 23.1 percent of gain, 224 ft per mile",
+   "confidence": "high",
+   "confidence_note": "Halfmile sections H to L start at the Bridge of the Gods and end at Manning Park, so they cover Washington. 2014 gain over 2026 mileage; the state line is placed mid-river on the bridge."
+  },
+  {
+   "id": "halves-equal-climb",
+   "group": "elevation",
+   "claim": "The halfway monument splits the climbing almost evenly: 50.7 percent of the gain comes before it and 49.3 percent after.",
+   "inputs": [
+    {
+     "name": "Gain, mile 0 to 1324.7",
+     "value": 228768,
+     "source": "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer",
+     "source_label": "USGS 3DEP ImageServer getSamples",
+     "note": "my calculation"
+    },
+    {
+     "name": "Gain, mile 1324.7 to 2655.8",
+     "value": 222739,
+     "source": "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer",
+     "source_label": "USGS 3DEP ImageServer getSamples",
+     "note": "my calculation"
+    },
+    {
+     "name": "Halfway monument mile",
+     "value": 1324.7,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Halfmile_PCTWaypoints/FeatureServer",
+     "source_label": "Halfmile_PCTWaypoints (Halfmile 2015 waypoints, hosted by PCTA)",
+     "note": "Halfmile waypoint PCTMidpoint snapped to PCTA 2026 tenth-mile markers"
+    }
+   ],
+   "arithmetic": "228,768 / (228,768 + 222,739) = 0.507; 222,739 / 451,507 = 0.493",
+   "result": "a 50.7 / 49.3 split",
+   "confidence": "medium",
+   "confidence_note": "Uses my 451,507 ft total, not Halfmile's. The split holds to about 1 point with other thresholds I tried."
+  },
+  {
+   "id": "high-low",
+   "group": "elevation",
+   "claim": "The PCT spans about 13,000 ft of elevation between its highest point (Forester Pass, 13,153 ft) and its lowest (the Columbia River at the Bridge of the Gods), and the two are 1,370 trail miles apart.",
+   "inputs": [
+    {
+     "name": "Forester Pass elevation, ft",
+     "value": 13153,
+     "source": "https://en.wikipedia.org/wiki/Pacific_Crest_Trail",
+     "source_label": "Wikipedia, Pacific Crest Trail"
+    },
+    {
+     "name": "Lowest point, ft (Wikipedia infobox, Cascade Locks)",
+     "value": 140,
+     "source": "https://en.wikipedia.org/wiki/Pacific_Crest_Trail",
+     "source_label": "Wikipedia, Pacific Crest Trail",
+     "note": "Wikipedia text says about 110 ft near the Bridge of the Gods; DEM river surface reads 78 ft"
+    },
+    {
+     "name": "Forester Pass mile",
+     "value": 780.7,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Halfmile_PCTWaypoints/FeatureServer",
+     "source_label": "Halfmile_PCTWaypoints (Halfmile 2015 waypoints, hosted by PCTA)",
+     "note": "Halfmile waypoint ForesterPass snapped to PCTA 2026 markers"
+    },
+    {
+     "name": "Bridge of the Gods span, mile",
+     "value": 2150.2,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Tenthmile_Marker_2026/FeatureServer",
+     "source_label": "Tenthmile_Marker_2026 (PCTA tenth-mile markers)",
+     "note": "DEM minimum, 78 ft, at miles 2150.2 and 2150.3"
+    }
+   ],
+   "arithmetic": "13,153 - 140 = 13,013 ft; 2150.2 - 780.7 = 1,369.5 mi; 780.7 / 2655.8 = 29.4 percent of the way; 2150.2 / 2655.8 = 81.0 percent",
+   "result": "13,013 ft of relief; high point at 29.4 percent, low point at 81.0 percent of the way",
+   "confidence": "medium",
+   "confidence_note": "Highest point is agreed. The lowest point is not: 140, about 110, about 180 (a PCT reader site) and 78 (DEM at the river, bridge deck excluded). Use the pass, not the number, if one must be avoided."
+  },
+  {
+   "id": "forester-air",
+   "group": "elevation",
+   "claim": "At Forester Pass the air pressure is 61 percent of sea level; at Campo it is 90 percent.",
+   "inputs": [
+    {
+     "name": "Forester Pass, ft",
+     "value": 13153,
+     "source": "https://en.wikipedia.org/wiki/Pacific_Crest_Trail",
+     "source_label": "Wikipedia, Pacific Crest Trail"
+    },
+    {
+     "name": "Campo terminus, ft (DEM)",
+     "value": 2918,
+     "source": "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer",
+     "source_label": "USGS 3DEP ImageServer getSamples"
+    },
+    {
+     "name": "Pressure equation, troposphere: T = 15.04 - 0.00649 h (C, h in m); p = 101.29 [(T + 273.1) / 288.08]^5.256 (kPa)",
+     "value": null,
+     "source": "https://www.grc.nasa.gov/www/k-12/airplane/atmosmet.html",
+     "source_label": "NASA Glenn, Earth atmosphere model (troposphere pressure equation)"
+    }
+   ],
+   "arithmetic": "Forester: h = 13,153 / 3.28084 = 4,009 m; T = 15.04 - 26.02 = -10.98 C; p = 101.29 x (262.12 / 288.08)^5.256 = 61.7 kPa; 61.7 / 101.325 = 60.9 percent. Campo: h = 889 m; p = 91.2 kPa = 90.0 percent.",
+   "result": "60.9 percent at Forester, 90.0 percent at Campo",
+   "confidence": "high",
+   "confidence_note": "Standard-atmosphere model; actual pressure moves a few percent with weather. Elevation inputs are as stated."
+  },
+  {
+   "id": "above-10k",
+   "group": "elevation",
+   "claim": "Only 130 of the PCT's miles (4.9 percent) lie above 10,000 ft, and just 1,861 ft of trail, about a third of a mile, lie above 13,000 ft.",
+   "inputs": [
+    {
+     "name": "Miles in 1,000-ft bands 10,000-11,000 / 11,000-12,000 / 12,000-13,000 / 13,000+",
+     "value": [
+      93.48,
+      31.78,
+      4.29,
+      0.352
+     ],
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/PCT_Per_Thousand_Ft/FeatureServer",
+     "source_label": "PCT_Per_Thousand_Ft (PCTA, miles of PCT per 1,000 ft elevation band)",
+     "note": "PCTA DEM-classed layer"
+    },
+    {
+     "name": "Sum of all 14 bands, mi",
+     "value": 2662.9,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/PCT_Per_Thousand_Ft/FeatureServer",
+     "source_label": "PCT_Per_Thousand_Ft (PCTA, miles of PCT per 1,000 ft elevation band)"
+    }
+   ],
+   "arithmetic": "93.48 + 31.78 + 4.29 + 0.352 = 129.9 mi; 129.9 / 2,662.9 = 4.9 percent; 0.352 mi x 5,280 = 1,861 ft",
+   "result": "129.9 mi above 10,000 ft; 4.6 mi above 12,000 ft; 1,861 ft above 13,000 ft",
+   "confidence": "high",
+   "confidence_note": "Band miles sum to 2,662.9, not 2,652.9, so they appear to follow the ground surface rather than the map. Percentages use the band total."
+  },
+  {
+   "id": "elevation-bands",
+   "group": "elevation",
+   "claim": "More than half the trail (56.6 percent, 1,507 miles) runs between 4,000 and 7,000 ft; 19.6 percent runs below 4,000 ft and 16.3 percent above 8,000 ft.",
+   "inputs": [
+    {
+     "name": "Miles by band, 4,000-5,000 / 5,000-6,000 / 6,000-7,000",
+     "value": [
+      389.58,
+      592.79,
+      524.55
+     ],
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/PCT_Per_Thousand_Ft/FeatureServer",
+     "source_label": "PCT_Per_Thousand_Ft (PCTA, miles of PCT per 1,000 ft elevation band)"
+    },
+    {
+     "name": "Miles below 4,000 ft (12.23 + 36.66 + 130.37 + 343.27)",
+     "value": 522.53,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/PCT_Per_Thousand_Ft/FeatureServer",
+     "source_label": "PCT_Per_Thousand_Ft (PCTA, miles of PCT per 1,000 ft elevation band)"
+    },
+    {
+     "name": "Miles above 8,000 ft (212.46 + 92.29 + 93.48 + 31.78 + 4.29 + 0.35)",
+     "value": 434.66,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/PCT_Per_Thousand_Ft/FeatureServer",
+     "source_label": "PCT_Per_Thousand_Ft (PCTA, miles of PCT per 1,000 ft elevation band)",
+     "note": "bands 8,000-9,000 through 13,000+"
+    }
+   ],
+   "arithmetic": "389.58 + 592.79 + 524.55 = 1,506.92; 1,506.92 / 2,662.9 = 56.6 percent; 522.53 / 2,662.9 = 19.6 percent; 434.66 / 2,662.9 = 16.3 percent",
+   "result": "56.6 percent of miles at 4,000 to 7,000 ft",
+   "confidence": "high",
+   "confidence_note": "Same layer and caveat as above-10k."
+  },
+  {
+   "id": "median-elevation",
+   "group": "elevation",
+   "claim": "The median PCT mile sits at 5,709 ft and the mean at 5,840 ft.",
+   "inputs": [
+    {
+     "name": "26,558 tenth-mile DEM samples",
+     "value": 26558,
+     "source": "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer",
+     "source_label": "USGS 3DEP ImageServer getSamples"
+    }
+   ],
+   "arithmetic": "median and mean of the 26,558 samples, ft: 5,709 and 5,840",
+   "result": "median 5,709 ft, mean 5,840 ft",
+   "confidence": "high",
+   "confidence_note": "Sampling every 0.1 mi is enough for a median; the layer-based bands above agree (the band midpoints put the median in the 5,000-6,000 ft band)."
+  },
+  {
+   "id": "crow-fly",
+   "group": "geometry",
+   "claim": "The trail is 2.3 times as long as the straight line from Campo to Monument 78: 2,655.8 trail miles for 1,155.8 miles of great-circle distance.",
+   "inputs": [
+    {
+     "name": "Campo terminus lat, lon",
+     "value": [
+      32.58974,
+      -116.46698
+     ],
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/PCTA_Centerline/FeatureServer",
+     "source_label": "PCTA_Centerline FeatureServer (PCTA authoritative centerline, last update 01/2025)",
+     "note": "first vertex of the centerline"
+    },
+    {
+     "name": "Monument 78 lat, lon",
+     "value": [
+      49.0003,
+      -120.80211
+     ],
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/PCTA_Centerline/FeatureServer",
+     "source_label": "PCTA_Centerline FeatureServer (PCTA authoritative centerline, last update 01/2025)",
+     "note": "last vertex"
+    },
+    {
+     "name": "PCTA mile-marker length",
+     "value": 2655.8,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Tenthmile_Marker_2026/FeatureServer",
+     "source_label": "Tenthmile_Marker_2026 (PCTA tenth-mile markers)"
+    }
+   ],
+   "arithmetic": "haversine (R = 3,958.76 mi) = 1,155.8 mi; 2655.8 / 1,155.8 = 2.30",
+   "result": "2.30 trail miles per mile of straight-line progress",
+   "confidence": "high",
+   "confidence_note": "Great-circle distance is exact for the two coordinates. Latitude span alone is 16.41 degrees x 69.05 mi = 1,133 mi."
+  },
+  {
+   "id": "length-disagreement",
+   "group": "geometry",
+   "claim": "The trail's length is 2,652.9 miles measured along the PCTA centerline on a map, and 2,655.8 miles by PCTA's own mile markers; the markers drift 8.2 miles ahead of the map distance at mile 750 and 2.8 miles ahead by the end.",
+   "inputs": [
+    {
+     "name": "Centerline polyline, 1,210,247 vertices, haversine length",
+     "value": 2652.95,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/PCTA_Centerline/FeatureServer",
+     "source_label": "PCTA_Centerline FeatureServer (PCTA authoritative centerline, last update 01/2025)"
+    },
+    {
+     "name": "PCTA 2026 last tenth-mile marker",
+     "value": 2655.8,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Tenthmile_Marker_2026/FeatureServer",
+     "source_label": "Tenthmile_Marker_2026 (PCTA tenth-mile markers)"
+    },
+    {
+     "name": "Wikipedia length",
+     "value": 2653,
+     "source": "https://en.wikipedia.org/wiki/Pacific_Crest_Trail",
+     "source_label": "Wikipedia, Pacific Crest Trail"
+    },
+    {
+     "name": "Marker-to-map offset at mile 750.1 (marker 750.1, map distance 741.9)",
+     "value": 8.2,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Tenthmile_Marker_2026/FeatureServer",
+     "source_label": "Tenthmile_Marker_2026 (PCTA tenth-mile markers)"
+    }
+   ],
+   "arithmetic": "2,655.8 - 2,652.95 = 2.85 mi; at mile 750: 750.1 - 741.9 = 8.2 mi; at mile 1000: 1,000.1 - 998.3 = 1.8 mi",
+   "result": "markers and map distance differ by up to 8.2 mi; they agree to 3 mi at both ends",
+   "confidence": "medium",
+   "confidence_note": "My calculation: each marker matched to the nearest centerline vertex. Cause not established. The offset climbs to 8.2 mi by mile 760, falls to 1.8 mi by mile 1000, then creeps back to 2.8 mi. Slope distance of the same line is about 2,660 mi, close to the marker total, but slope distance would not make the offset fall in the Sierra, so one cause does not explain it."
+  },
+  {
+   "id": "daylight",
+   "group": "geometry",
+   "claim": "On June 21 the sun is up 14 h 18 min at Campo and 16 h 12 min at Monument 78, 1 h 54 min longer; at Chester it is 15 h 03 min.",
+   "inputs": [
+    {
+     "name": "Campo, 2026-06-21: sunrise 05:39, sunset 19:57 (PDT)",
+     "value": [
+      "05:39",
+      "19:57"
+     ],
+     "source": "https://aa.usno.navy.mil/api/rstt/oneday",
+     "source_label": "US Naval Observatory, sun rise and set one-day API",
+     "note": "coords 32.5897, -116.467, tz -7"
+    },
+    {
+     "name": "Chester Hwy 36, 2026-06-21: 05:36, 20:39",
+     "value": [
+      "05:36",
+      "20:39"
+     ],
+     "source": "https://aa.usno.navy.mil/api/rstt/oneday",
+     "source_label": "US Naval Observatory, sun rise and set one-day API",
+     "note": "coords 40.2615, -121.3389"
+    },
+    {
+     "name": "Monument 78, 2026-06-21: 04:59, 21:11",
+     "value": [
+      "04:59",
+      "21:11"
+     ],
+     "source": "https://aa.usno.navy.mil/api/rstt/oneday",
+     "source_label": "US Naval Observatory, sun rise and set one-day API",
+     "note": "coords 49.0003, -120.8021"
+    }
+   ],
+   "arithmetic": "Campo 19:57 - 05:39 = 14:18; Chester 20:39 - 05:36 = 15:03; Monument 21:11 - 04:59 = 16:12; 16:12 - 14:18 = 1:54",
+   "result": "solstice day length: 14:18, 15:03, 16:12 from south to north",
+   "confidence": "high",
+   "confidence_note": "Rise and set from the US Naval Observatory; the Sierra and Cascades block the horizon, so usable light is shorter than the sun-up figure. Same query on Dec 21 (PST): Campo 10:00, Monument 8:13."
+  },
+  {
+   "id": "daylight-season",
+   "group": "geometry",
+   "claim": "A hiker leaving Campo on April 20 has 13 h 09 min of sun that day; arriving at Monument 78 on September 22 the hiker has 12 h 11 min, so the season takes 58 minutes of daylight away even though the hiker has walked 16 degrees north (on September 22 Campo has 12 h 08 min).",
+   "inputs": [
+    {
+     "name": "Campo 2026-04-20 rise 06:10 set 19:19",
+     "value": [
+      "06:10",
+      "19:19"
+     ],
+     "source": "https://aa.usno.navy.mil/api/rstt/oneday",
+     "source_label": "US Naval Observatory, sun rise and set one-day API"
+    },
+    {
+     "name": "Monument 78 2026-09-22 rise 06:50 set 19:01",
+     "value": [
+      "06:50",
+      "19:01"
+     ],
+     "source": "https://aa.usno.navy.mil/api/rstt/oneday",
+     "source_label": "US Naval Observatory, sun rise and set one-day API"
+    },
+    {
+     "name": "Campo 2026-09-22 rise 06:34 set 18:42",
+     "value": [
+      "06:34",
+      "18:42"
+     ],
+     "source": "https://aa.usno.navy.mil/api/rstt/oneday",
+     "source_label": "US Naval Observatory, sun rise and set one-day API"
+    }
+   ],
+   "arithmetic": "Campo Apr 20: 19:19 - 06:10 = 13:09; Monument Sep 22: 19:01 - 06:50 = 12:11; Campo Sep 22: 18:42 - 06:34 = 12:08",
+   "result": "58 minutes less daylight at the finish than at the start",
+   "confidence": "high",
+   "confidence_note": "Start date and finish date are examples (April 20 and Sept 22), not survey averages."
+  },
+  {
+   "id": "full-moons",
+   "group": "time",
+   "claim": "A hiker who starts April 14 and takes the survey-average 148 days walks under 5 full moons in 2026 and 5 in 2027; 2026 includes a second full moon in May (May 31).",
+   "inputs": [
+    {
+     "name": "Full moons April to October 2026, USNO (UT) converted to PDT (UT - 7 h; daylight time runs Mar 8 to Nov 1)",
+     "value": "Apr 1 19:12, May 1 10:23, May 31 01:45, Jun 29 16:56, Jul 29 07:36, Aug 27 21:18, Sep 26 09:49, Oct 25 21:12",
+     "source": "https://aa.usno.navy.mil/api/moon/phases/year?year=2026",
+     "source_label": "US Naval Observatory, moon phases by year API"
+    },
+    {
+     "name": "Full moons April to October 2027, same conversion (daylight time runs Mar 14 to Nov 7)",
+     "value": "Apr 20 15:27, May 20 03:59, Jun 18 17:44, Jul 18 08:45, Aug 17 00:29, Sep 15 16:03, Oct 15 06:47",
+     "source": "https://aa.usno.navy.mil/api/moon/phases/year?year=2026",
+     "source_label": "US Naval Observatory, moon phases by year API",
+     "note": "https://aa.usno.navy.mil/api/moon/phases/year?year=2027"
+    },
+    {
+     "name": "Average northbound start, hikers happy with their date",
+     "value": "April 14",
+     "source": "https://www.halfwayanywhere.com/trails/pacific-crest-trail/pct-hiker-survey-2025/",
+     "source_label": "Halfway Anywhere, Pacific Crest Trail Hiker Survey 2025 (N = 790, self-selected)"
+    },
+    {
+     "name": "Average days on trail, completers",
+     "value": 148,
+     "source": "https://www.halfwayanywhere.com/trails/pacific-crest-trail/pct-hiker-survey-2025/",
+     "source_label": "Halfway Anywhere, Pacific Crest Trail Hiker Survey 2025 (N = 790, self-selected)"
+    }
+   ],
+   "arithmetic": "2026: Apr 14 + 148 days = Sep 9; full moons in range (PDT): May 1 10:23, May 31 01:45, Jun 29 16:56, Jul 29 07:36, Aug 27 21:18. 2027: Apr 14 + 148 days = Sep 9; in range: Apr 20 15:27, May 20 03:59, Jun 18 17:44, Jul 18 08:45, Aug 17 00:29. 148 / 29.53 = 5.01 lunar months.",
+   "result": "5 full moons in 2026, 5 in 2027, in 5.01 lunations",
+   "confidence": "high",
+   "confidence_note": "Dates are exact (USNO). Start date and length are survey averages; a hiker who starts earlier or later sees 5 or 6. May 1 and May 31 2026 are both in May by Pacific time (May 31 at 01:45 PDT)."
+  },
+  {
+   "id": "steps",
+   "group": "time",
+   "claim": "Walking 2,655.8 miles takes about 5.6 to 6.4 million steps, 38,000 to 43,000 a day over 148 days.",
+   "inputs": [
+    {
+     "name": "Step length 2.5 ft (men) and 2.2 ft (women)",
+     "value": [
+      2.5,
+      2.2
+     ],
+     "source": "https://greatruns.com/articles/how-many-steps-in-a-mile-complete-guide-for-walkers-and-runners/",
+     "source_label": "Steps-per-mile figures (step length 2.5 ft men, 2.2 ft women, University of Oklahoma figures as reported)",
+     "note": "reported figures; stride sources use \"stride\" for a single step"
+    },
+    {
+     "name": "PCTA length, mi",
+     "value": 2655.8,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Tenthmile_Marker_2026/FeatureServer",
+     "source_label": "Tenthmile_Marker_2026 (PCTA tenth-mile markers)"
+    },
+    {
+     "name": "Days on trail, average",
+     "value": 148,
+     "source": "https://www.halfwayanywhere.com/trails/pacific-crest-trail/pct-hiker-survey-2025/",
+     "source_label": "Halfway Anywhere, Pacific Crest Trail Hiker Survey 2025 (N = 790, self-selected)"
+    }
+   ],
+   "arithmetic": "2655.8 x 5,280 = 14,022,624 ft; / 2.5 = 5,609,050; / 2.2 = 6,373,920; per day: 37,899 to 43,067",
+   "result": "5.6 to 6.4 million steps",
+   "confidence": "low",
+   "confidence_note": "Step length on a loaded climb is shorter than on a sidewalk, so the real count is likely higher. The step-length source is a secondary page. Mileage walked also exceeds 2,655.8 (see miles-walked)."
+  },
+  {
+   "id": "miles-walked",
+   "group": "time",
+   "claim": "Survey completers report 18.4 miles a day over 148 days, which is 2,723 miles: about 67 miles more than the trail's length.",
+   "inputs": [
+    {
+     "name": "Average daily mileage including zero days, completers",
+     "value": 18.4,
+     "source": "https://www.halfwayanywhere.com/trails/pacific-crest-trail/pct-hiker-survey-2025/",
+     "source_label": "Halfway Anywhere, Pacific Crest Trail Hiker Survey 2025 (N = 790, self-selected)"
+    },
+    {
+     "name": "Average days on trail, completers",
+     "value": 148,
+     "source": "https://www.halfwayanywhere.com/trails/pacific-crest-trail/pct-hiker-survey-2025/",
+     "source_label": "Halfway Anywhere, Pacific Crest Trail Hiker Survey 2025 (N = 790, self-selected)"
+    },
+    {
+     "name": "PCTA length, mi",
+     "value": 2655.8,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Tenthmile_Marker_2026/FeatureServer",
+     "source_label": "Tenthmile_Marker_2026 (PCTA tenth-mile markers)"
+    }
+   ],
+   "arithmetic": "18.4 x 148 = 2,723.2; 2,723.2 - 2655.8 = 67.4; 2.5 percent",
+   "result": "about 67 extra miles (2.5 percent), from alternates, side trails and walks to town",
+   "confidence": "low",
+   "confidence_note": "Product of two self-reported averages; the average of a product is not the product of averages, so read it as roughly 2 to 3 percent. The survey is self-selected and covers completers."
+  },
+  {
+   "id": "hiking-days",
+   "group": "time",
+   "claim": "A completer walks on 130 of 148 days and covers 20.4 miles on each of them; the survey reports 20.8.",
+   "inputs": [
+    {
+     "name": "Days on trail",
+     "value": 148,
+     "source": "https://www.halfwayanywhere.com/trails/pacific-crest-trail/pct-hiker-survey-2025/",
+     "source_label": "Halfway Anywhere, Pacific Crest Trail Hiker Survey 2025 (N = 790, self-selected)"
+    },
+    {
+     "name": "Days hiking, excluding zeros",
+     "value": 130,
+     "source": "https://www.halfwayanywhere.com/trails/pacific-crest-trail/pct-hiker-survey-2025/",
+     "source_label": "Halfway Anywhere, Pacific Crest Trail Hiker Survey 2025 (N = 790, self-selected)"
+    },
+    {
+     "name": "Zero days, average",
+     "value": 17,
+     "source": "https://www.halfwayanywhere.com/trails/pacific-crest-trail/pct-hiker-survey-2025/",
+     "source_label": "Halfway Anywhere, Pacific Crest Trail Hiker Survey 2025 (N = 790, self-selected)"
+    },
+    {
+     "name": "Nearo days, average",
+     "value": 14,
+     "source": "https://www.halfwayanywhere.com/trails/pacific-crest-trail/pct-hiker-survey-2025/",
+     "source_label": "Halfway Anywhere, Pacific Crest Trail Hiker Survey 2025 (N = 790, self-selected)"
+    },
+    {
+     "name": "Reported miles per day excluding zeros",
+     "value": 20.8,
+     "source": "https://www.halfwayanywhere.com/trails/pacific-crest-trail/pct-hiker-survey-2025/",
+     "source_label": "Halfway Anywhere, Pacific Crest Trail Hiker Survey 2025 (N = 790, self-selected)"
+    }
+   ],
+   "arithmetic": "130 / 148 = 87.8 percent; 2655.8 / 130 = 20.4; 20.8 vs 20.4 differ by 0.4",
+   "result": "87.8 percent of days are hiking days; 20.4 mi per hiking day from the trail length alone",
+   "confidence": "medium",
+   "confidence_note": "The match to 20.8 is a consistency check on the survey, and it again suggests some miles beyond 2,655.8."
+  },
+  {
+   "id": "midpoint-pace",
+   "group": "time",
+   "claim": "At the survey-average 18.4 miles a day, the halfway monument arrives on day 72 (June 25 for an April 14 start) and Hwy 36 for Chester on day 72.4; the second half of the trail takes 71.9 days.",
+   "inputs": [
+    {
+     "name": "Daily pace including zeros",
+     "value": 18.4,
+     "source": "https://www.halfwayanywhere.com/trails/pacific-crest-trail/pct-hiker-survey-2025/",
+     "source_label": "Halfway Anywhere, Pacific Crest Trail Hiker Survey 2025 (N = 790, self-selected)"
+    },
+    {
+     "name": "Halfway monument mile",
+     "value": 1324.7,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Halfmile_PCTWaypoints/FeatureServer",
+     "source_label": "Halfmile_PCTWaypoints (Halfmile 2015 waypoints, hosted by PCTA)"
+    },
+    {
+     "name": "Hwy 36 mile",
+     "value": 1332.9,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Halfmile_PCTWaypoints/FeatureServer",
+     "source_label": "Halfmile_PCTWaypoints (Halfmile 2015 waypoints, hosted by PCTA)"
+    },
+    {
+     "name": "Trail end mile",
+     "value": 2655.8,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Tenthmile_Marker_2026/FeatureServer",
+     "source_label": "Tenthmile_Marker_2026 (PCTA tenth-mile markers)"
+    },
+    {
+     "name": "Average northbound start",
+     "value": "April 14",
+     "source": "https://www.halfwayanywhere.com/trails/pacific-crest-trail/pct-hiker-survey-2025/",
+     "source_label": "Halfway Anywhere, Pacific Crest Trail Hiker Survey 2025 (N = 790, self-selected)"
+    }
+   ],
+   "arithmetic": "1,324.7 / 18.4 = 72.0 days; 1,332.9 / 18.4 = 72.4; (2,655.8 - 1,332.9) / 18.4 = 71.9; Apr 14 + 72 days = Jun 25",
+   "result": "Mexico to Hwy 36 and Hwy 36 to Canada take almost the same time at a constant pace: 72.4 and 71.9 days",
+   "confidence": "medium",
+   "confidence_note": "Constant-pace arithmetic. Real pace is slower in snow and desert heat and faster in Oregon, so actual midpoint dates spread widely. The same survey gives an average finish of September 12, 151 days after April 14, 3 days past the 148-day average."
+  },
+  {
+   "id": "weekly-bubble",
+   "group": "time",
+   "claim": "At 18.4 miles a day a hiker moves 129 miles a week; the first week from Campo ends between Warner Springs (mile 109.5) and Hwy 74 (mile 151.9).",
+   "inputs": [
+    {
+     "name": "Daily pace including zeros",
+     "value": 18.4,
+     "source": "https://www.halfwayanywhere.com/trails/pacific-crest-trail/pct-hiker-survey-2025/",
+     "source_label": "Halfway Anywhere, Pacific Crest Trail Hiker Survey 2025 (N = 790, self-selected)"
+    },
+    {
+     "name": "Warner Springs mile / Hwy 74 mile",
+     "value": [
+      109.5,
+      151.9
+     ],
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Halfmile_PCTWaypoints/FeatureServer",
+     "source_label": "Halfmile_PCTWaypoints (Halfmile 2015 waypoints, hosted by PCTA)",
+     "note": "Halfmile waypoints Warner Springs and Hwy74 snapped to PCTA 2026 markers"
+    }
+   ],
+   "arithmetic": "18.4 x 7 = 128.8 mi per week; 109.5 < 128.8 < 151.9; 2,655.8 / 128.8 = 20.6 weeks",
+   "result": "128.8 miles per week; 20.6 weeks for 2,655.8 miles",
+   "confidence": "low",
+   "confidence_note": "Average over a whole hike. Pace in the first weeks is usually lower, and the survey reports the finishing hikers, not the bubble itself. Postholer journals would be the source for the bubble; it was not reachable."
+  },
+  {
+   "id": "fastest",
+   "group": "time",
+   "claim": "The reported self-supported record, 45 days 17 h 47 min (southbound, finished 2026-08-22), is 58 miles a day: 3.2 times the survey-average pace.",
+   "inputs": [
+    {
+     "name": "Fowler self-supported time, days",
+     "value": 45.740972222222226,
+     "source": "https://fastestknowntime.com/fkt/nick-fowler-pacific-crest-trail-ca-or-wa-2026-08-22",
+     "source_label": "Fastest Known Time, Nick Fowler, Pacific Crest Trail, 2026-08-22",
+     "note": "45 d 17 h 47 min; listed on fastestknowntime.com, coverage says pending verification"
+    },
+    {
+     "name": "Trail length used by the listing",
+     "value": 2653,
+     "source": "https://en.wikipedia.org/wiki/Pacific_Crest_Trail",
+     "source_label": "Wikipedia, Pacific Crest Trail",
+     "note": "Wikipedia 2,653 mi; the FKT page has its own route length"
+    },
+    {
+     "name": "Survey average pace",
+     "value": 18.4,
+     "source": "https://www.halfwayanywhere.com/trails/pacific-crest-trail/pct-hiker-survey-2025/",
+     "source_label": "Halfway Anywhere, Pacific Crest Trail Hiker Survey 2025 (N = 790, self-selected)"
+    }
+   ],
+   "arithmetic": "45 d 17 h 47 min = 45.741 d; 2,653 / 45.741 = 58.0 mi per day; 58.0 / 18.4 = 3.2",
+   "result": "about 58 miles a day against 18.4",
+   "confidence": "low",
+   "confidence_note": "Record status is disputed or pending: Wikipedia lists a different supported record (Karel Sabbe, 46 d 12 h 56 min, 2023) while GearJunkie names Aurélien Sanchez at 45 d 20 h 11 min. Pace uses 2,653 mi as an approximation of the listed route."
+  },
+  {
+   "id": "calories",
+   "group": "body",
+   "claim": "Scaling one recorded thru-hiker's energy use to the whole trail gives about 830,000 kcal, and he ate 27 percent less than he burned.",
+   "inputs": [
+    {
+     "name": "Total energy expenditure, kcal per day",
+     "value": 5702,
+     "source": "https://doi.org/10.1016/j.wem.2023.06.011",
+     "source_label": "Weiss, Frech, Perez, Wilderness & Environmental Medicine 34(4):536-542 (2023), DOI 10.1016/j.wem.2023.06.011 (abstract read via Europe PMC)",
+     "note": "heart-rate method, not doubly labeled water; n = 1, 55-year-old man, PCT 2021"
+    },
+    {
+     "name": "Energy intake, kcal per day",
+     "value": 4141,
+     "source": "https://doi.org/10.1016/j.wem.2023.06.011",
+     "source_label": "Weiss, Frech, Perez, Wilderness & Environmental Medicine 34(4):536-542 (2023), DOI 10.1016/j.wem.2023.06.011 (abstract read via Europe PMC)"
+    },
+    {
+     "name": "Days / distance in the case",
+     "value": [
+      128,
+      "3,767 km = 2,341 mi"
+     ],
+     "source": "https://doi.org/10.1016/j.wem.2023.06.011",
+     "source_label": "Weiss, Frech, Perez, Wilderness & Environmental Medicine 34(4):536-542 (2023), DOI 10.1016/j.wem.2023.06.011 (abstract read via Europe PMC)"
+    },
+    {
+     "name": "PCTA length",
+     "value": 2655.8,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Tenthmile_Marker_2026/FeatureServer",
+     "source_label": "Tenthmile_Marker_2026 (PCTA tenth-mile markers)"
+    }
+   ],
+   "arithmetic": "5,702 x 128 = 729,856 kcal over 2,341 mi = 311.8 kcal per mile; x 2655.8 = 828,002 kcal. Intake: 4,141 / 5,702 = 72.6 percent; deficit 1,561 kcal per day; body mass fell 9 percent (reported).",
+   "result": "about 830,000 kcal for 2,655.8 mi",
+   "confidence": "low",
+   "confidence_note": "One 55-year-old man, expenditure estimated from heart rate, and his 3,767 km hike was shorter than the full trail. An assumed 4,000 kcal per day (a round figure, not measured here) x 148 days gives 592,000; 5,702 x 148 gives 843,900. Use the range 590,000 to 840,000."
+  },
+  {
+   "id": "permit-growth",
+   "group": "people",
+   "claim": "Long-distance permits rose 3.6 times from 1,879 in 2013 to 6,840 in 2024, northbound thru-hike permits 4.0 times, southbound 10.0 times.",
+   "inputs": [
+    {
+     "name": "Permits issued 2013 / 2024 (total, NOBO, SOBO)",
+     "value": [
+      [
+       1879,
+       988,
+       53
+      ],
+      [
+       6840,
+       3935,
+       532
+      ]
+     ],
+     "source": "https://www.pcta.org/wp-content/uploads/2025/01/2024-PCT-Long-distance-Permit-numbers.png",
+     "source_label": "PCTA permit numbers table image",
+     "note": "PCTA table through 2024; 2020 shows \"Pandemic, no data\""
+    }
+   ],
+   "arithmetic": "6,840 / 1,879 = 3.64; 3,935 / 988 = 3.98; 532 / 53 = 10.04",
+   "result": "3.64x total, 3.98x northbound, 10.04x southbound",
+   "confidence": "high",
+   "confidence_note": "The PCTA says it required a permit per person starting in 2013. Its table's total column does not equal the sum of its category columns (2024: 3,935 + 532 + 2,333 + 2 + 8 = 6,810 against 6,840; 2023 differs by 359), so the total may count other permit types. Peak year is 2019 with 7,888."
+  },
+  {
+   "id": "sobo-share",
+   "group": "people",
+   "claim": "Southbound hikers were 5.1 percent of thru-hike permits in 2013 and 11.9 percent in 2024.",
+   "inputs": [
+    {
+     "name": "2013 NOBO 988, SOBO 53",
+     "value": [
+      988,
+      53
+     ],
+     "source": "https://www.pcta.org/wp-content/uploads/2025/01/2024-PCT-Long-distance-Permit-numbers.png",
+     "source_label": "PCTA permit numbers table image"
+    },
+    {
+     "name": "2024 NOBO 3,935, SOBO 532",
+     "value": [
+      3935,
+      532
+     ],
+     "source": "https://www.pcta.org/wp-content/uploads/2025/01/2024-PCT-Long-distance-Permit-numbers.png",
+     "source_label": "PCTA permit numbers table image"
+    }
+   ],
+   "arithmetic": "53 / (988 + 53) = 5.1 percent; 532 / (3,935 + 532) = 11.9 percent",
+   "result": "5.1 percent to 11.9 percent",
+   "confidence": "high",
+   "confidence_note": "Permit holders, not starters; the PCTA notes many permit holders do not hike."
+  },
+  {
+   "id": "finish-ratio",
+   "group": "people",
+   "claim": "People reporting a finish to the PCTA equal 14.5 to 33.9 percent of that year's thru-hike permits (2013 to 2024), 17.4 percent in 2024.",
+   "inputs": [
+    {
+     "name": "Finishers reported per year (PCTA 2,600 Miler List counts)",
+     "value": {
+      "2013": 287,
+      "2014": 496,
+      "2015": 677,
+      "2016": 776,
+      "2017": 571,
+      "2018": 1201,
+      "2019": 1000,
+      "2021": 805,
+      "2022": 949,
+      "2023": 654,
+      "2024": 778,
+      "2025": 669
+     },
+     "source": "https://www.pcta.org/discover-the-trail/thru-hiking-long-distance-hiking/2600-miler-list/",
+     "source_label": "PCTA, 2,600 Miler List (counts per year via the page's own year selector)",
+     "note": "list includes 2025 = 669; 2026 shows 1 on 2026-10-22; 2020 not recognised (18 listed)"
+    },
+    {
+     "name": "NOBO + SOBO thru-hike permits per year",
+     "value": {
+      "2013": 1041,
+      "2014": 1461,
+      "2015": 2808,
+      "2016": 3493,
+      "2017": 3928,
+      "2018": 4991,
+      "2019": 5441,
+      "2021": 4413,
+      "2022": 4728,
+      "2023": 4247,
+      "2024": 4467
+     },
+     "source": "https://www.pcta.org/wp-content/uploads/2025/01/2024-PCT-Long-distance-Permit-numbers.png",
+     "source_label": "PCTA permit numbers table image"
+    }
+   ],
+   "arithmetic": "2013: 287 / (988 + 53) = 27.6; 2014: 496 / (1,367 + 94) = 33.9; 2015: 677 / (2,486 + 322) = 24.1; 2016: 776 / (3,159 + 334) = 22.2; 2017: 571 / (3,490 + 438) = 14.5; 2018: 1,201 / (4,500 + 491) = 24.1; 2019: 1,000 / (4,748 + 693) = 18.4; 2021: 805 / (3,787 + 626) = 18.2; 2022: 949 / (4,125 + 603) = 20.1; 2023: 654 / (3,647 + 600) = 15.4; 2024: 778 / (3,935 + 532) = 17.4",
+   "result": "ratios by year: 2013 27.6%, 2014 33.9%, 2015 24.1%, 2016 22.2%, 2017 14.5%, 2018 24.1%, 2019 18.4%, 2021 18.2%, 2022 20.1%, 2023 15.4%, 2024 17.4%",
+   "confidence": "medium",
+   "confidence_note": "Not a completion rate. List entries are self-reported on the honor system (PCTA says it does not verify), include section hikers and people who started without a thru-hike permit, and finishers can hold earlier-year permits. Wikipedia gives about 14 percent as the average completion rate. The 2025 hiker survey (N = 790) reports 79 percent completion among its respondents, which shows how a self-selected sample differs."
+  },
+  {
+   "id": "finishers-alltime",
+   "group": "people",
+   "claim": "The PCTA's list holds 11,685 finishers since 1951, and 8,881 of them (76 percent) reported finishing between 2013 and 2025.",
+   "inputs": [
+    {
+     "name": "All-time list total, 131 repeat finishers",
+     "value": 11685,
+     "source": "https://www.pcta.org/discover-the-trail/thru-hiking-long-distance-hiking/2600-miler-list/",
+     "source_label": "PCTA, 2,600 Miler List (counts per year via the page's own year selector)"
+    },
+    {
+     "name": "Counts by year 2013 to 2025 (incl. 2020 = 18)",
+     "value": {
+      "2013": 287,
+      "2014": 496,
+      "2015": 677,
+      "2016": 776,
+      "2017": 571,
+      "2018": 1201,
+      "2019": 1000,
+      "2020": 18,
+      "2021": 805,
+      "2022": 949,
+      "2023": 654,
+      "2024": 778,
+      "2025": 669
+     },
+     "source": "https://www.pcta.org/discover-the-trail/thru-hiking-long-distance-hiking/2600-miler-list/",
+     "source_label": "PCTA, 2,600 Miler List (counts per year via the page's own year selector)"
+    }
+   ],
+   "arithmetic": "287 + 496 + 677 + 776 + 571 + 1,201 + 1,000 + 18 + 805 + 949 + 654 + 778 + 669 = 8,881; 8,881 / 11,685 = 76.0 percent",
+   "result": "76 percent of all finishers on record are from the last 13 years",
+   "confidence": "medium",
+   "confidence_note": "Year assignment is by the list's own year field. The 11,685 total and the yearly counts come from the live page on 2026-10-22; the 2026 entry count (1) is too low to use, probably reporting lag."
+  },
+  {
+   "id": "snow-vs-finish",
+   "group": "people",
+   "claim": "Across six years with a statewide April 1 reading, reported finishes per thru-hike permit were highest in the 52 percent snowpack year (24.1, 2018) and lowest in the 237 percent year (15.4, 2023); the correlation across the six is about -0.72.",
+   "inputs": [
+    {
+     "name": "California statewide snowpack, percent of April 1 average",
+     "value": {
+      "2018": 52,
+      "2019": 162,
+      "2021": 59,
+      "2022": 38,
+      "2023": 237,
+      "2024": 110
+     },
+     "source": "https://water.ca.gov/News/News-Releases/2023/April-23/Snow-Survey-April-2023",
+     "source_label": "DWR April 2023 snow survey",
+     "note": "2018 52 (dwr18), 2019 162 (dwr19), 2021 59 (dwr21), 2022 38 (dwr22), 2023 237 (dwr23), 2024 110 (dwr24)"
+    },
+    {
+     "name": "Finish ratio per year (percent)",
+     "value": {
+      "2018": 24.1,
+      "2019": 18.4,
+      "2021": 18.2,
+      "2022": 20.1,
+      "2023": 15.4,
+      "2024": 17.4
+     },
+     "source": "https://www.pcta.org/discover-the-trail/thru-hiking-long-distance-hiking/2600-miler-list/",
+     "source_label": "PCTA, 2,600 Miler List (counts per year via the page's own year selector)",
+     "note": "from finish-ratio"
+    }
+   ],
+   "arithmetic": "Pearson r between snowpack and finish ratio, n = 6: -0.722. Pairs: 2018 (52, 24.1), 2019 (162, 18.4), 2021 (59, 18.2), 2022 (38, 20.1), 2023 (237, 15.4), 2024 (110, 17.4)",
+   "result": "r = -0.72; the 237 percent year had the lowest ratio, 15.4",
+   "confidence": "low",
+   "confidence_note": "Six points and uncontrolled: fire, heat, permit mix and reporting change by year, and 2017 (a large-snow year) is missing because I found no statewide April 1 number from DWR. The 2026 reading was 18 percent (second lowest on record, DWR); the 2026 finisher list is not yet usable. Sierra snow, not statewide snow, is what hikers meet; the statewide number is a proxy."
+  },
+  {
+   "id": "dixie",
+   "group": "fire",
+   "claim": "The 2021 Dixie Fire put 161 miles of the PCT inside its closure area, 6.1 percent of the trail, and burned 112 of them (4.2 percent).",
+   "inputs": [
+    {
+     "name": "Dixie Fire, 2021, Plumas NF: PCT miles in closure area / burned",
+     "value": [
+      161,
+      112
+     ],
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/PCT_Fires_and_Trail_Closures_public_view/FeatureServer",
+     "source_label": "PCT_Fires_and_Trail_Closures_public_view (PCTA)",
+     "note": "PCTA fires and closures layer"
+    },
+    {
+     "name": "PCTA length",
+     "value": 2655.8,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Tenthmile_Marker_2026/FeatureServer",
+     "source_label": "Tenthmile_Marker_2026 (PCTA tenth-mile markers)"
+    }
+   ],
+   "arithmetic": "161 / 2655.8 = 6.1 percent; 112 / 2655.8 = 4.2 percent",
+   "result": "161 closed miles, 112 burned",
+   "confidence": "medium",
+   "confidence_note": "The PCTA layer gives 161 closure miles. The range of mile 1235 to 1365 (130 miles) that came with the request could not be confirmed in any source I could read; closure areas grew and shrank during the fire, and mileage numbering has changed since 2021, so the two figures may describe different dates or editions."
+  },
+  {
+   "id": "eagle-creek",
+   "group": "fire",
+   "claim": "The 2017 Eagle Creek Fire closed 32 miles of the PCT and burned 10, about 1.2 percent and 0.4 percent of the trail.",
+   "inputs": [
+    {
+     "name": "Eagle Creek Fire, 2017, Columbia River Gorge NSA: closure miles / burned",
+     "value": [
+      32,
+      10
+     ],
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/PCT_Fires_and_Trail_Closures_public_view/FeatureServer",
+     "source_label": "PCT_Fires_and_Trail_Closures_public_view (PCTA)"
+    },
+    {
+     "name": "PCTA length",
+     "value": 2655.8,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Tenthmile_Marker_2026/FeatureServer",
+     "source_label": "Tenthmile_Marker_2026 (PCTA tenth-mile markers)"
+    }
+   ],
+   "arithmetic": "32 / 2655.8 = 1.2 percent; 10 / 2655.8 = 0.4 percent",
+   "result": "32 closed, 10 burned",
+   "confidence": "high",
+   "confidence_note": "PCTA layer values. The closure ran past the fire, which is why closure miles exceed burned miles."
+  },
+  {
+   "id": "closure-2026",
+   "group": "fire",
+   "claim": "In July 2026 the last 43 miles of the PCT, 1.6 percent of its length, were closed by wildfire, and hikers built a temporary monument near Rainy Pass.",
+   "inputs": [
+    {
+     "name": "USFS announcement of 2026-07-29: last 43 miles closed",
+     "value": 43,
+     "source": "https://www.opb.org/article/2026/08/18/pacific-crest-trail-homemade-temporary-monument-marks-end-wildfire/",
+     "source_label": "OPB, homemade temporary monument marks end of wildfire-closed PCT (2026-08-18)",
+     "note": "quoted by OPB"
+    },
+    {
+     "name": "Ptarmigan Fire 2026: PCT miles in closure area",
+     "value": 50,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/PCT_Fires_and_Trail_Closures_public_view/FeatureServer",
+     "source_label": "PCT_Fires_and_Trail_Closures_public_view (PCTA)",
+     "note": "PCTA layer, 0 burned listed"
+    },
+    {
+     "name": "Fires closed 200 miles of the PCT in Washington since 2021",
+     "value": 200,
+     "source": "https://www.opb.org/article/2026/08/18/pacific-crest-trail-homemade-temporary-monument-marks-end-wildfire/",
+     "source_label": "OPB, homemade temporary monument marks end of wildfire-closed PCT (2026-08-18)",
+     "note": "OPB statement"
+    }
+   ],
+   "arithmetic": "43 / 2655.8 = 1.6 percent; 2,655.8 - 43 = 2,612.8",
+   "result": "2,612.8 miles reachable on 2026-07-29 under that closure",
+   "confidence": "medium",
+   "confidence_note": "Closure status changes weekly; the PCTA layer lists the Ptarmigan closure as 50 miles, the news report 43. This is the reported July state, not today's. The site should state a date next to any closure number."
+  },
+  {
+   "id": "fire-entries",
+   "group": "fire",
+   "claim": "The PCTA closure layer has 144 entries from 2006 to 2026: 1 in 2015, 10 in 2017, 11 in 2020, 30 in 2024.",
+   "inputs": [
+    {
+     "name": "Count of entries by year (2015: 1, 2017: 10, 2020: 11, 2021: 5, 2022: 7, 2023: 5, 2024: 30, 2025: 29, 2026: 23)",
+     "value": 144,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/PCT_Fires_and_Trail_Closures_public_view/FeatureServer",
+     "source_label": "PCT_Fires_and_Trail_Closures_public_view (PCTA)"
+    }
+   ],
+   "arithmetic": "by year: 2006 1, 2013 2, 2015 1, 2016 9, 2017 10, 2018 10, 2019 1, 2020 11, 2021 5, 2022 7, 2023 5, 2024 30, 2025 29, 2026 23; 1 + 2 + 1 + 9 + 10 + 10 + 1 + 11 + 5 + 7 + 5 + 30 + 29 + 23 = 144",
+   "result": "entries per year rose from 1 to about 30",
+   "confidence": "low",
+   "confidence_note": "Entries count records, not fires; the layer was likely filled in more thoroughly in recent years, so the rise overstates the change in fire. Closure miles per entry overlap and must not be summed (2024 sums to 664.5 mi on a trail of 2,655.8)."
+  },
+  {
+   "id": "midpoint",
+   "group": "landmarks",
+   "claim": "The halfway monument sits at mile 1,324.7 on the PCTA's 2026 markers, 3.2 miles short of half of the current length (1,327.9) and 8.2 miles south of the Hwy 36 crossing for Chester.",
+   "inputs": [
+    {
+     "name": "Halfway monument, Halfmile waypoint PCTMidpoint, snapped to PCTA 2026 tenth-mile markers",
+     "value": 1324.7,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Halfmile_PCTWaypoints/FeatureServer",
+     "source_label": "Halfmile_PCTWaypoints (Halfmile 2015 waypoints, hosted by PCTA)",
+     "note": "40.21000, -121.35590; Backpacker lists the monument near 40.2129, -121.3534"
+    },
+    {
+     "name": "Hwy 36 crossing (Halfmile waypoint Hwy36)",
+     "value": 1332.9,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Halfmile_PCTWaypoints/FeatureServer",
+     "source_label": "Halfmile_PCTWaypoints (Halfmile 2015 waypoints, hosted by PCTA)"
+    },
+    {
+     "name": "PCTA length",
+     "value": 2655.8,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Tenthmile_Marker_2026/FeatureServer",
+     "source_label": "Tenthmile_Marker_2026 (PCTA tenth-mile markers)"
+    }
+   ],
+   "arithmetic": "2655.8 / 2 = 1327.9; 1327.9 - 1,324.7 = 3.2; 1,332.9 - 1,324.7 = 8.2",
+   "result": "monument 1,324.7; arithmetic half 1,327.9; Hwy 36 1,332.9",
+   "confidence": "medium",
+   "confidence_note": "The monument's mile has moved with the numbering: 1,320.7 (Backpacker 2016), 1,323.2 (Wikipedia's table), 1,324.7 (PCTA 2026 markers). Backpacker (2016) says Halfmile put the true half at 1,325.1 then. All three are from different mileage editions; use the 2026 figure with its year."
+  },
+  {
+   "id": "states",
+   "group": "landmarks",
+   "claim": "California holds 63.7 percent of the trail (1,692.9 miles), Oregon 17.2 percent (457.4) and Washington 19.0 percent (505.5).",
+   "inputs": [
+    {
+     "name": "California-Oregon line is 42 degrees north; first PCTA tenth-mile marker at or north of 42.0",
+     "value": 1692.9,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Tenthmile_Marker_2026/FeatureServer",
+     "source_label": "Tenthmile_Marker_2026 (PCTA tenth-mile markers)"
+    },
+    {
+     "name": "Oregon-Washington line mid-river on the Bridge of the Gods, about",
+     "value": 2150.3,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Tenthmile_Marker_2026/FeatureServer",
+     "source_label": "Tenthmile_Marker_2026 (PCTA tenth-mile markers)",
+     "note": "span at miles 2150.2 to 2150.4 (DEM minimum)"
+    },
+    {
+     "name": "End",
+     "value": 2655.8,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Tenthmile_Marker_2026/FeatureServer",
+     "source_label": "Tenthmile_Marker_2026 (PCTA tenth-mile markers)"
+    }
+   ],
+   "arithmetic": "1,692.9 / 2655.8 = 63.7; (2,150.3 - 1,692.9) = 457.4, / 2655.8 = 17.2; (2655.8 - 2,150.3) = 505.5, / 2655.8 = 19.0",
+   "result": "CA 1,692.9 / OR 457.4 / WA 505.5 miles",
+   "confidence": "medium",
+   "confidence_note": "Boundary placement is mine: latitude 42 and the mid-river bridge position. It depends on the mile numbering; on map distance California is about 1,690 mi. Treat to the nearest mile."
+  },
+  {
+   "id": "trail-towns",
+   "group": "landmarks",
+   "claim": "The PCTA's public resupply layer lists 106 places, one for every 25 trail miles on average.",
+   "inputs": [
+    {
+     "name": "Entries in Trail_Town_Resupply_Public",
+     "value": 106,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Trail_Town_Resupply_Public/FeatureServer",
+     "source_label": "Trail_Town_Resupply_Public (PCTA)"
+    },
+    {
+     "name": "PCTA length",
+     "value": 2655.8,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Tenthmile_Marker_2026/FeatureServer",
+     "source_label": "Tenthmile_Marker_2026 (PCTA tenth-mile markers)"
+    }
+   ],
+   "arithmetic": "2655.8 / 106 = 25.1",
+   "result": "25.1 trail miles per entry",
+   "confidence": "low",
+   "confidence_note": "Entries include several per hub (for example Banner and Julian) and places up to 25 miles from the trail, so the real spacing of usable stops is wider. Count of entries only."
+  },
+  {
+   "id": "centerline-detail",
+   "group": "landmarks",
+   "claim": "The PCTA centerline is a line of 1,210,247 points, one every 11.6 feet.",
+   "inputs": [
+    {
+     "name": "Vertices in PCTA_Centerline (single polyline)",
+     "value": 1210247,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/PCTA_Centerline/FeatureServer",
+     "source_label": "PCTA_Centerline FeatureServer (PCTA authoritative centerline, last update 01/2025)"
+    },
+    {
+     "name": "Length, mi",
+     "value": 2652.95,
+     "source": "https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/PCTA_Centerline/FeatureServer",
+     "source_label": "PCTA_Centerline FeatureServer (PCTA authoritative centerline, last update 01/2025)"
+    }
+   ],
+   "arithmetic": "2,652.95 x 5,280 = 14,007,576 ft; / 1,210,246 segments = 11.57 ft",
+   "result": "11.57 ft per segment",
+   "confidence": "high",
+   "confidence_note": "Counted from the downloaded geometry; useful for how fine a drawn profile can be."
+  }
+ ]
+}

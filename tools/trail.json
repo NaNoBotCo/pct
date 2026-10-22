@@ -1,0 +1,242 @@
+{
+ "miles": 2655.8,
+ "year": 2026,
+ "chester": 1332.9,
+ "halfway": 1324.7,
+ "border": {
+  "or": 1692.9,
+  "wa": 2150.3
+ },
+ "gain": {
+  "total": 489418,
+  "loss": 488411
+ },
+ "stepsPerMile": 2259,
+ "pace": [
+  {
+   "to": 702.8,
+   "mpd": 20.7
+  },
+  {
+   "to": 1092,
+   "mpd": 17.25
+  },
+  {
+   "to": 1692.9,
+   "mpd": 24.150000000000002
+  },
+  {
+   "to": 2150.3,
+   "mpd": 27.599999999999998
+  },
+  {
+   "to": 9999,
+   "mpd": 21.849999999999998
+  }
+ ],
+ "snow": {
+  "mile": 702.8,
+  "day": 155
+ },
+ "model": {
+  "hikers": 300,
+  "startFrom": 73,
+  "startTo": 139,
+  "quit": 0.5
+ },
+ "notes": {
+  "walk": {
+   "en": "Profile: the PCTA's 2026 mile markers and centerline, with USGS 3DEP elevations, read 22 October 2026. The climb is the profile's own, scaled to Halfmile's measured total of 489,418 ft up and 488,411 ft down: a profile read once a mile adds up to only about 311,000 ft, because short ups and downs fall between the samples. Steps at 2,259 a mile, between a 2.5 ft and a 2.2 ft stride. Daylight is sunrise to sunset at the walker's latitude. Moon phases from the mean lunar month.",
+   "th": "โปรไฟล์: หลักไมล์และแนวเส้นทางปี 2026 ของสมาคม PCTA กับความสูงจาก USGS 3DEP อ่านเมื่อ 22 ตุลาคม 2026 ระยะขึ้นเขาคิดจากโปรไฟล์ แล้วปรับให้รวมเท่ากับที่ Halfmile วัดได้ ขึ้น 489,418 ฟุต ลง 488,411 ฟุต ถ้าอ่านโปรไฟล์ไมล์ละครั้ง จะรวมได้แค่ราว 311,000 ฟุต เพราะเนินสั้น ๆ ตกหล่นระหว่างจุด ก้าวคิดที่ไมล์ละ 2,259 ก้าว แสงกลางวันคือช่วงพระอาทิตย์ขึ้นถึงตกที่ละติจูดของนักเดิน ข้างขึ้นข้างแรมคิดจากเดือนจันทรคติเฉลี่ย"
+  },
+  "bubble": {
+   "en": "Most northbound hikers leave Campo between mid-March and mid-May. Draw 300 of them as lines, date across and mile up, and the crowd shows: the early starters stand still at Kennedy Meadows, mile 703, waiting for the Sierra snow (the gold steps), then a wave rolls north through Chester, Oregon and Washington, thinning as people stop. Set a start date and a pace to draw your own line.",
+   "th": "นักเดินขึ้นเหนือส่วนใหญ่ออกจากแคมโประหว่างกลางมีนาคมถึงกลางพฤษภาคม วาด 300 คนเป็นเส้น วันที่ตามแนวนอน ไมล์ตามแนวตั้ง แล้วฝูงคนก็ปรากฏ คนที่ออกเร็วต้องหยุดรอหิมะเซียร์ราที่เคนเนดีเมโดวส์ ไมล์ 703 (ขั้นสีทอง) แล้วคลื่นก็เคลื่อนขึ้นเหนือผ่านเชสเตอร์ โอเรกอน และวอชิงตัน บางลงเมื่อคนหยุดกลางทาง ตั้งวันออกเดินและความเร็วเพื่อวาดเส้นของคุณเอง"
+  },
+  "model": {
+   "en": "A model, not a record. Start dates run from 15 March to 20 May, most in mid-April. Each line walks a pace for its section (slowest in the Sierra, fastest in Oregon) times its own speed, takes a zero day every eighth day, and waits at Kennedy Meadows until 5 June. The paces are set so a hiker who starts on the 2025 Halfway Anywhere survey's average day, 14 April, finishes on its average day, 12 September. Half the lines stop somewhere: a round figure between the PCTA's reported finishes (17 percent of 2024 permits, a floor) and the survey's 79 percent (its respondents, a ceiling). Full moons from the mean lunar month.",
+   "th": "เป็นแบบจำลอง ไม่ใช่บันทึกจริง วันออกเดินกระจายตั้งแต่ 15 มีนาคมถึง 20 พฤษภาคม ส่วนใหญ่กลางเมษายน แต่ละเส้นเดินด้วยความเร็วตามช่วงเส้นทาง (ช้าสุดในเซียร์รา เร็วสุดในโอเรกอน) คูณความเร็วของตัวเอง พักหนึ่งวันทุกวันที่แปด และรอที่เคนเนดีเมโดวส์จนถึง 5 มิถุนายน ตั้งค่าให้คนที่ออกวันเฉลี่ยของแบบสำรวจ Halfway Anywhere ปี 2025 คือ 14 เมษายน เดินจบวันเฉลี่ยคือ 12 กันยายน ครึ่งหนึ่งของเส้นหยุดกลางทาง เป็นตัวเลขกลม ๆ ระหว่างผู้แจ้งเดินจบต่อ PCTA (17 เปอร์เซ็นต์ของใบอนุญาตปี 2024 ค่าต่ำสุด) กับ 79 เปอร์เซ็นต์ของผู้ตอบแบบสำรวจ (ค่าสูงสุด)"
+  }
+ },
+ "flags": {
+  "Southern terminus, Campo (Mexican border)": {
+   "name": "Campo, Mexican border",
+   "short": "Campo",
+   "big": true,
+   "live": true
+  },
+  "Mount Laguna": {
+   "live": true
+  },
+  "Eagle Rock": {},
+  "Warner Springs (Hwy 79)": {
+   "name": "Warner Springs",
+   "live": false
+  },
+  "Idyllwild access (Halfmile waypoint \"Idyllwild\")": {
+   "name": "Idyllwild",
+   "live": true
+  },
+  "San Jacinto Peak (side trip)": {
+   "skip": true
+  },
+  "Fuller Ridge trailhead": {
+   "name": "Fuller Ridge"
+  },
+  "Big Bear (Hwy 18)": {
+   "name": "Big Bear",
+   "live": true
+  },
+  "Cajon Pass (PCT crossing of I-15, Cajon Wash)": {
+   "name": "Cajon Pass (I-15)"
+  },
+  "Wrightwood (Hwy 2)": {
+   "name": "Wrightwood"
+  },
+  "Agua Dulce": {
+   "live": true
+  },
+  "Tehachapi (Hwy 58)": {
+   "name": "Tehachapi (Hwy 58)"
+  },
+  "Walker Pass (Hwy 178)": {
+   "name": "Walker Pass",
+   "live": true
+  },
+  "Kennedy Meadows South": {
+   "name": "Kennedy Meadows",
+   "short": "Kennedy Meadows",
+   "big": true,
+   "line": true,
+   "live": true
+  },
+  "Mount Whitney (summit, via Whitney Trail)": {
+   "skip": true
+  },
+  "Forester Pass": {
+   "short": "Forester Pass",
+   "big": true,
+   "live": true
+  },
+  "Muir Pass": {},
+  "Evolution Basin (Wanda Lake)": {
+   "name": "Evolution Basin"
+  },
+  "Vermilion Valley Resort (Edison Lake)": {
+   "name": "Vermilion Valley Resort"
+  },
+  "Tuolumne Meadows": {
+   "line": true,
+   "live": true,
+   "short": "Tuolumne"
+  },
+  "Sonora Pass (Hwy 108)": {
+   "name": "Sonora Pass"
+  },
+  "Hwy 50 / Echo Summit (access to South Lake Tahoe)": {
+   "name": "Echo Summit (Hwy 50)",
+   "live": true
+  },
+  "Echo Lake": {
+   "skip": true
+  },
+  "Donner Summit (I-80)": {
+   "name": "Donner Summit"
+  },
+  "Sierra City (Hwy 49)": {
+   "name": "Sierra City",
+   "live": true
+  },
+  "Belden": {},
+  "Halfway monument (PCT midpoint)": {
+   "name": "Halfway monument",
+   "short": "Halfway",
+   "big": true
+  },
+  "Hwy 36 (access to Chester)": {
+   "name": "Chester (Hwy 36)",
+   "short": "Chester",
+   "big": true,
+   "line": true,
+   "live": true
+  },
+  "Drakesbad / Warner Valley (Lassen Volcanic NP)": {
+   "name": "Drakesbad, Lassen"
+  },
+  "Hat Creek Rim (Halfmile waypoint \"HatCreekView\")": {
+   "name": "Hat Creek Rim"
+  },
+  "Burney Falls (McArthur-Burney Falls Memorial SP)": {
+   "name": "Burney Falls",
+   "live": true
+  },
+  "Castle Crags State Park": {
+   "name": "Castle Crags"
+  },
+  "Etna Summit (Hwy 3)": {
+   "name": "Etna Summit",
+   "live": true
+  },
+  "Seiad Valley": {},
+  "Ashland access (I-5, Siskiyou Pass)": {
+   "name": "Ashland (I-5)",
+   "short": "Ashland",
+   "line": true,
+   "live": true
+  },
+  "Crater Lake: Mazama Village (Hwy 62)": {
+   "name": "Mazama Village, Crater Lake"
+  },
+  "Crater Lake: Rim Village": {
+   "name": "Crater Lake, Rim Village",
+   "short": "Crater Lake",
+   "big": true,
+   "live": true
+  },
+  "Shelter Cove": {
+   "live": true
+  },
+  "Timberline Lodge": {
+   "live": true
+  },
+  "Cascade Locks / Bridge of the Gods": {
+   "name": "Bridge of the Gods, Cascade Locks",
+   "short": "Bridge of the Gods",
+   "big": true,
+   "line": true,
+   "live": true
+  },
+  "Goat Rocks: Old Snowy Mountain and Knife's Edge ridge": {
+   "name": "Goat Rocks, Knife's Edge",
+   "live": true
+  },
+  "White Pass (Hwy 12)": {
+   "name": "White Pass"
+  },
+  "Snoqualmie Pass (I-90)": {
+   "name": "Snoqualmie Pass",
+   "live": true
+  },
+  "Stevens Pass (Hwy 2)": {
+   "name": "Stevens Pass"
+  },
+  "Stehekin (High Bridge)": {
+   "name": "Stehekin",
+   "line": true,
+   "live": true
+  },
+  "Harts Pass": {
+   "live": false
+  },
+  "Northern terminus, Monument 78 (Canadian border)": {
+   "name": "Monument 78, Canadian border",
+   "short": "Canada",
+   "big": true,
+   "line": true,
+   "live": true
+  },
+  "Manning Park Resort, B.C. (beyond the monument)": {
+   "skip": true
+  }
+ }
+}

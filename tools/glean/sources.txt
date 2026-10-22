@@ -1,0 +1,54 @@
+Every URL used, what it supported, date read (all 2026-10-22 unless stated). Postholer first.
+
+POSTHOLER, NOT REACHED. https://www.postholer.com/ and /data/ : curl with a Safari user agent timed out (20 s, three URLs), WebFetch returned connection refused to 23.23.237.83:443, the browser pane refused to navigate. Nothing from postholer.com was used. A search result showed an article "Adding Elevations To PCTA Data" at https://www.postholer.com/articles/Adding-Elevations-To-PCTA-Data (title seen in search results, page not read). Postholer's trail data derive from the Halfmile and PCTA files used below. Postholer journals, snow and fire tools were not read, so no Postholer anecdata is in numbers.json; the Halfway Anywhere survey stands in for pace and start dates.
+
+PROFILE AND WAYPOINTS
+https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/PCTA_Centerline/FeatureServer : PCTA's authoritative centerline (built from Halfmile's 2018 release, reroutes through 2024, updated 01/2025); one polyline, 1,210,247 vertices, queried with outSR=4326. Supported: length 2,652.95 mi, the 0.01 mi sampling track, terminus coordinates.
+https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Tenthmile_Marker_2026/FeatureServer : 26,600 tenth-mile markers, lat/lon/mile, 26,558 with coordinates, last at mile 2655.8. Supported: profile x-axis and mile for every waypoint.
+https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/PCT_Mile_Markers_2026/FeatureServer : 5,320 half-mile markers, 0.5 to 2,660 (5,311 with coordinates, last at 2655.5). Supported: cross-check of mileage.
+https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Halfmile_PCTWaypoints/FeatureServer : 8,526 Halfmile 2015 waypoints with names and lat/lon. Supported: coordinates of passes, highway crossings, PCTMidpoint, MexBorder, Monument78.
+https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/Trail_Town_Resupply_Public/FeatureServer : 106 trail-town points. Supported: town coordinates, crow-fly distances, trail-towns item.
+https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/PCT_Fires_and_Trail_Closures_public_view/FeatureServer : 144 closure entries 2006 to 2026. Supported: Dixie, Eagle Creek, Ptarmigan, closure counts.
+https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services/PCT_Per_Thousand_Ft/FeatureServer : PCT miles per 1,000 ft band, 14 bands, total 2,662.9 mi. Supported: elevation-band items.
+https://services5.arcgis.com/ZldHa25efPFpMmfB/ArcGIS/rest/services : the PCTA ArcGIS service directory, listing all layers. Also https://www.pcta.org/discover-the-trail/maps/pct-data/ (named in the service description as the download page; not opened).
+https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer : USGS 3DEP getSamples, bare-earth DEM, metres converted to feet. Supported: every elevation in profile.json, profile_0p1mi.json, waypoints.json and the gain/loss calculations. Spot check, https://epqs.nationalmap.gov/v1/json (point query at Mount Whitney read 14,491 ft).
+https://www.fs.usda.gov/trails/pacific-crest-nst/data-tools/gis : Forest Service page pointing to the PCTA centerline data (seen in search results, not opened).
+https://pctmap.net/2014/03/04/elevation-gain-on-the-pacific-crest-trail/ : Halfmile, 489,418 ft gain, 488,411 ft loss, net 1,007 ft, per-section table, method (USGS 1/3 arc-second DEM, 5 m threshold, about 3/4 million points).
+https://www.pcta.org/2014/new-numbers-elevation-gain-loss-pacific-crest-trail-17581/ : PCTA post of 2014-03-04 calling 489,418 ft the most accurate figure ever.
+https://pctmap.net/2015/03/08/check-out-the-new-elevation-profiles/ : Halfmile 2015 elevation profile PDFs (California and Oregon/Washington); derivation of their elevations not stated.
+https://nominatim.openstreetmap.org/ : OSM geocoder, coordinates for Mount Whitney, San Jacinto Peak, Wanda Lake (Evolution Basin), Old Snowy Mountain, Rim Village (Crater Lake Lodge), Manning Park Resort, Bridge of the Gods.
+https://en.wikipedia.org/wiki/Pacific_Crest_Trail : length 2,653 mi, highest point Forester Pass 13,153 ft, lowest 140 ft (infobox) and about 110 ft (text), 25 national forests, 7 national parks, mid-way post 1,323.2 mi, completion rate about 14 percent.
+https://www.backpacker.com/trips/the-halfway-point-of-the-pacific-crest-trail/ : 2016 account: monument at mile 1320.7, Halfmile suggested 1325.1.
+Backpacker section guide listing the monument near 40.2129, -121.3534 (seen in search results, not opened).
+
+PERMITS, FINISHERS
+https://www.pcta.org/our-work/trail-and-land-management/pct-visitor-use-statistics/ : permit statistics page; permits are published each year-end; self-reported finishers; pre-2013 permits unreliable; 50 permits a day at the border.
+https://www.pcta.org/wp-content/uploads/2025/01/2024-PCT-Long-distance-Permit-numbers.png : the permit table 2013 to 2024, read from the image. The Total column does not equal the sum of the category columns.
+https://www.pcta.org/discover-the-trail/thru-hiking-long-distance-hiking/2600-miler-list/ : 11,685 completions, 131 repeat; yearly counts taken by calling the page's own year selector (POST /wp-admin/admin-ajax.php, action pcta_milerlist) and counting rows; no names kept. 2020 completions are not recognised (18 listed); 2026 shows 1.
+
+PACE, DATES, ENERGY
+https://www.halfwayanywhere.com/trails/pacific-crest-trail/pct-hiker-survey-2025/ : 2025 survey, N = 790, self-selected: 148 days on trail, 130 hiking days, 17 zero days, 14 nearo days, 18.4 mi/day with zeros, 20.8 without, NOBO start April 14, finish September 12, 79 percent completion among respondents. Only the first 100,000 characters of the page were read.
+https://doi.org/10.1016/j.wem.2023.06.011 : Weiss, Frech, Perez 2023, Wilderness & Environmental Medicine 34(4):536-542, one 55-year-old thru-hiker in 2021, 3,767 km over 128 days, expenditure 5,702 kcal/day, intake 4,141, body mass down 9 percent. Abstract read through the Europe PMC REST service (https://www.ebi.ac.uk/europepmc/webservices/rest/search, PMID 37586947). PubMed page itself returned a cookie notice.
+https://greatruns.com/articles/how-many-steps-in-a-mile-complete-guide-for-walkers-and-runners/ : step length 2.5 ft men, 2.2 ft women (University of Oklahoma figures as reported by secondary pages; seen in search results, not opened).
+https://fastestknowntime.com/fkt/nick-fowler-pacific-crest-trail-ca-or-wa-2026-08-22 : self-supported time 45 d 17 h 47 min, dated 2026-08-22 (seen in search results, not opened). Coverage at gearjunkie.com and marathonhandbook.com says the record awaits verification.
+https://en.wikipedia.org/wiki/Mount_Everest : 8,848.86 m, 29,031.7 ft.
+https://www.grc.nasa.gov/www/k-12/airplane/atmosmet.html : troposphere temperature and pressure equations.
+
+SKY
+https://aa.usno.navy.mil/api/moon/phases/year?year=2026 (also year=2024 and 2027) : full and new moon dates and times, UT.
+https://aa.usno.navy.mil/api/rstt/oneday : sunrise and sunset for Campo, Chester (Hwy 36) and Monument 78 on 2026-04-20, 06-21, 09-22 and 12-21.
+
+SNOW
+https://water.ca.gov/News/News-Releases/2018/April-18/April-Snow-Survey : statewide snowpack 52 percent of April 1 average (2018-04-02).
+https://water.ca.gov/News/News-Releases/2019/April/Snow-Survey-Boosts-Runoff-Predictions : 162 percent (2019-04-02).
+https://water.ca.gov/News/News-Releases/2021/April-21/Statewide-Snowpack-Well-Below-Normal-as-Wet-Season-Winds-Down : 59 percent (2021-04-01).
+https://water.ca.gov/News/News-Releases/2022/April-22/April-2022-Snow-Survey : 38 percent (2022-04-01).
+https://water.ca.gov/News/News-Releases/2023/April-23/Snow-Survey-April-2023 : 237 percent (2023-04-03).
+https://water.ca.gov/News/News-Releases/2024/Apr-24/April-Snow-Survey-Shows-Above-Average-Snowpack-for-Second-Straight-Season : 110 percent (2024-04-02).
+https://water.ca.gov/News/News-Releases/2026/Apr-2026/Record-Hot-Dry-March-Wipes-Out-California-Snowpack-Leaving-No-Measurable-Snow-for-April-Survey : 18 percent, second lowest on record, northern Sierra 6 percent (2026-04-01).
+Not found: a DWR statewide April 1 figure for 2013 to 2017, 2020 and 2025 (2017 coverage gave Phillips Station 183 percent and southern Sierra 164 percent; late-March 2025 release gave 90 percent). cdec.water.ca.gov could not be opened from the browser pane.
+
+FIRE AND 2026
+https://www.opb.org/article/2026/08/18/pacific-crest-trail-homemade-temporary-monument-marks-end-wildfire/ : Ptarmigan Fire, last 43 miles closed 2026-07-29, hiker-built monument near Rainy Pass, 200 miles of Washington trail closed by fire since 2021.
+
+Blocked from this Mac: https://www.pcta.org returned HTTP 403 (Cloudflare check) to curl and WebFetch; its pages were read in the browser pane instead. Not read: Postholer, cdec.water.ca.gov, permit.pcta.org.
